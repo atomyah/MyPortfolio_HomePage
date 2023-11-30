@@ -1,0 +1,120 @@
+/* スプラッシュイメージを囲む<figure>タグ */
+.figure {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.3;
+}
+
+/* 文字を画像の中央に配置
+参考：https://yoncoichi.com/text-on-the-image/ */
+.title {
+  position: absolute;
+  top:15%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  font-size: 1.6em;
+  font-weight: 600;
+  font-family:sans-serif;
+  color: rgb(1, 69, 60)
+}
+
+/* メニューヘッダー<Header />を画像の中央に配置 */
+.navContainer {
+  position: absolute;
+  top: 2%;
+  right:3%
+}
+/* /////////////////////////////////////////// */
+/* ヘッダー画像およびサイトタイトル、メニューここまで */
+/* /////////////////////////////////////////// */
+
+/* ページタイトル */
+/* .pageTitle {
+  MUIのTypographyで必要なくなった
+} */
+
+/* /////////////////////////////////////////// */
+/* ギャラリー↓ */
+/* /////////////////////////////////////////// */
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center; 
+  width: 90%;
+  height: auto;
+  overflow: hidden;
+  gap: 2px;
+  flex-direction: row; /* autoだとスクロールバーが出てしまう */
+  margin: 10px auto; /* .galleryコンテナ自体を中央寄せ */
+}
+/* .card {
+MUIのGridレイアウトで必要なくなった
+*/
+
+/* ↓ これでobject-fit:coverみたいになる。 */
+.cardImg {
+  width: 100%;
+  height: auto;
+  padding: 2px;
+  border-radius: 5px 5px 0 0;
+}
+
+/* .cardContent {
+  MUIのBoxレイアウトで必要なくなった
+}
+.cardTitle {
+  MUIのTypographyで必要なくなった
+} */
+/* .cardText {
+  MUIのBoxで必要なくなった
+} */
+
+
+
+
+/* ///////////// */
+/* メディアクエリ */
+/* レスポンシブカードレイアウト（MUIのGridレイアウトで必要なくなった */
+/* トップページのサイトタイトル位置・サイズのみ調整 */
+/* 
+MUIのブレイクポイント
+xs – 極小: 0px ～
+sm – 小: 600px ～
+md – 中: 900px ～
+lg – 大: 1200px ～
+xl – 特大: 1536px ～ */
+/* ///////////// */
+
+/* タブレット */
+@media (max-width: 600px) {
+  .title {
+    position: absolute;
+    top:7%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    font-size: 1.4em;
+    font-weight: 600;
+    color: rgb(1, 69, 60)
+  }
+
+}
+
+/* スマフォ */
+@media (max-width: 419px) {
+  .title {
+    position: absolute;
+    top:9%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    font-size: 1.1em;
+    font-weight: 600;
+    color: rgb(1, 69, 60)
+  }
+
+}
+

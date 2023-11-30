@@ -1,0 +1,22 @@
+/* /thanksページのCSS */
+
+/* <Header />を包むコンテナ */
+.navContainer {
+    position: absolute;
+    top: 0;
+    right:3%;
+    transform: translate(0%,-120%);
+    padding-bottom: 50px;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: auto;
+    overflow: hidden;
+    flex-direction: row; /* autoだとスクロールバーが出てしまう */
+    margin: 100px auto; /* .containerコンテナ自体を中央寄せ */
+}

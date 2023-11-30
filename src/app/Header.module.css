@@ -1,0 +1,25 @@
+.header {
+  background-color: rgba(150, 169, 188, 0); /* 背景を透明にしてる */
+}
+.header ul{
+  margin: 0px auto;
+  padding-bottom: 3px;
+  text-align:end;
+  border-bottom: 1px solid black;
+
+}
+.header ul li{
+  display: inline-block; /* 横並びにする */
+  margin-right: 30px;
+  font-size: 0.85em;
+}
+.header ul li:nth-child(3) {
+  margin-right: 5px;
+}
+.header ul li .links{
+  text-decoration: none;
+  color: black
+}
+.header ul li .links:hover{
+  color: burlywood;
+}
