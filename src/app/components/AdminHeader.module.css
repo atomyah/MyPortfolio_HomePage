@@ -1,0 +1,22 @@
+.header {
+    background-color: rgba(150, 169, 188, 0); /* 背景を透明にしてる */
+  }
+  .header ul{
+    margin: 0px auto 30px auto;
+    padding-bottom: 3px;
+    text-align:end;
+    border-bottom: 1px solid slategray;
+  }
+  .header ul li{
+    display: inline-block; /* 横並びにする */
+    margin-right: 20px;
+    font-size: 0.75em;
+    color: gray;
+  }
+  .header ul li .links{
+    text-decoration: none;
+    color: gray
+  }
+  .header ul li .links:hover{
+    color: burlywood;
+  }

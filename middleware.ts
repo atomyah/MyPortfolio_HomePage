@@ -4,7 +4,6 @@
 
 import { NextApiRequest, NextApiResponse } from "next";
 import { NextRequest, NextResponse } from 'next/server'
-
 import jwt from "jsonwebtoken"
 
 //型定義
@@ -25,8 +24,11 @@ const middleware = (handler: Function) => {
       return handler(req, res)
     }
 
-    // const token = await req.headers.authorization.split(" ")[1]
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF0b21AeWFoLmJ6IiwiaWF0IjoxNzAxMjI5MDMwLCJleHAiOjE3MDEzMTE4MzB9.tF--8w0Wx73-bgnIOjNL1Z4AGPM44u-aPpcx1KN6axs"
+    const token = await (req.headers.authorization ?? '').split(" ")[1]
+    // req.headers.authorizationの中身は「Bearer eyJhbGciOiJI....」となるため半角スペースでsplitした後半を取り出している．
+    // pages/api/create/page.tsx70行目参考
+    
+    // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF0b21AeWFoLmJ6IiwiaWF0IjoxNzAxMzE1ODkyLCJleHAiOjE3MDEzOTg2OTJ9.a46czI1AT5Tffr2SsytjmaAu7EWwaAKB4qXuKiHQk94"
 
     if(!token){
       return res.status(401).json({message: 'トークンがありません' })
@@ -35,7 +37,7 @@ const middleware = (handler: Function) => {
     try{
       const decoded = jwt.verify(token, secret_key)
         // console.log('▲', token) // eyJhbGciOiJIUzI1NiIsInR....が表示
-        // console.log('■ デコードされたtoken:', decoded) //  {email: 'atom@yah.bz', iat: 1701152943, exp: 1701235743}と表示
+        // console.log('■ デコードされたtoken:', decoded) //  {email: 'atom@example..', iat: 1701152943, exp: 1701235743}と表示
         req.body.email = (decoded as DecodedType).email // req.body.emailにdecoded.emalが格納されupdate/[id].ts等にreqとして渡される
         return handler(req,res)
       }catch(err){
@@ -57,7 +59,7 @@ export default middleware
 //   if (basicAuth) {
 //     const auth = basicAuth.split(' ')[1] // authにはYXRvbUB5YWguYno6YWhvbTE0Njc=が格納．
 //     const [user, pwd] = Buffer.from(auth, 'base64').toString().split(':') // authをbase64デコード
-//     console.log('■'); console.log(user); console.log(pwd) // ■ atom@yah.bz a**m1**7と表示
+//     console.log('■'); console.log(user); console.log(pwd) // ■ atom@example.com a**m1***と表示
 
 //     // basic認証のUser/Passが、envファイルにある値と同じかをチェック
 //     if (user ===  process.env.NEXT_PUBLIC_USER && pwd === process.env.NEXT_PUBLIC_PASS) {
@@ -77,14 +79,11 @@ export default middleware
 
 export const config = {
   matcher: [  // matcherとはmiddlewareによる認証チェックを行うページ／API
-    //ページのURL//
-    "/create",
-    "/update",
-    "/delete",
+    //pageのURL//
+    // "/item/create",
     //apiのURL//
     "/api/item/create",
     "/api/item/update/:path*",
     "/api/item/delete/:path*",
-
   ],
 }

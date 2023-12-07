@@ -20,7 +20,7 @@ const getSingleItem = async(req: NextApiRequest, res: NextApiResponse<ResReadSin
         await connectDB()
         console.log(req.query.id) // req.query.idでURLのスラグ(＝itemのid)が取得できる．
 
-        // singleItemが存在しない(null)の場合があるため、以下の2行のnull対策コードが必要
+        // singleItemが存在しない(null)場合があるため、以下の2行のnull対策コードが必要
         const singleItem: ExtendedSavedItemDataType | null = await ItemModel.findById(req.query.id)
         if(!singleItem) return res.status(400).json({message: 'アイテム無し故に読み取り失敗'}) // このnull対応がないと26行目singleItemでエラー
         

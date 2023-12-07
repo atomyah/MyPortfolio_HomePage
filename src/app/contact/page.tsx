@@ -14,7 +14,6 @@ import {
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Header from "../Header";
-import Footer from "../Footer";
 import { useRouter } from "next/navigation"; //"next/router"ではなくなった．
 import styles from "./page.module.css";
 // ↓ npm install @hookform/resolvers yup でインストール

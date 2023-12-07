@@ -1,0 +1,18 @@
+/* app/item/update/updated/page.module.css /thanksページのCSS */
+
+/* <Header />を包むコンテナ */
+.navContainer {
+    position: absolute;
+    top: 0;
+    right:3%;
+    transform: translate(0%,0%);
+    padding-bottom: 50px;
+}
+/* <AdminHeader />を包むコンテナ */
+.navContainerAdmin {
+    position: absolute;
+    top: 0;
+    right:1.5%;
+    transform: translate(0%,30%);
+    padding-bottom: 50px;
+}

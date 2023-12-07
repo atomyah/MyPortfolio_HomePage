@@ -1,6 +1,6 @@
 // pages/api/item/update/[id].ts
 {/* middleware.tsをインポートしexport default middleware(updateItem)
-とmiddlewareでコンポーネントを囲ってあげる必要がある．*/}
+とmiddlewareでコンポーネントをラップする必要がある．*/}
 
 import { NextApiRequest, NextApiResponse } from "next";
 import { NextResponse } from "next/server";
@@ -30,7 +30,7 @@ const updateItem = async(req: ExtendedNextApiRequestItem, res: NextApiResponse<R
         //     title: 'ユーザー判定テスト',
         //     image: 'ユーザー判定テスト',
         //     description: 'ユーザー判定テスト',
-        //     email: 'atom@yah.bz' ← emailだけmiddleware.tsから渡されたreq.body.email(decoded.email)になっている．
+        //     email: 'atom@example...' ← emailだけmiddleware.tsから渡されたreq.body.email(decoded.email)になっている．
         //   },
 
     try {

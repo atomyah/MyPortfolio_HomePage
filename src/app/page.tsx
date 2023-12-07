@@ -10,34 +10,48 @@ import {
   Box,
   Typography,
 } from "@mui/material";
+import { ItemModel, ItemDataType } from "@/utils/schemaModels";
+import { Types } from 'mongoose'
+import { NextApiRequest, NextApiResponse } from "next";
+import { NextResponse } from "next/server";
 
 //// Next/font/googleフォントの設定 ////
 // 参考：font.ts
 import { mPlusRounded1c, ZenKakuGothicNew, SourceCodePro } from "./font";
 
-export default function Home() {
-  // 画像プレビュー機能
-  // const [preview, setPreview] = useState<string | null>(null);
+// 型定義
+interface ExtendedSavedItemDataType extends ItemDataType {
+  _id: Types.ObjectId
+}
 
-  // const handleChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
-  //   const { files } = e.target;
-  //   if (files && files.length > 0) {
-  //     setPreview(window.URL.createObjectURL(files[0]));
-  //   }
-  // };
+const Home = () => {
   const [splashNum, setSplashNum] = useState<string>("");
+  const [allItems, setAllItems] = useState<ExtendedSavedItemDataType[]>([])
 
   useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch(`https://my-portfolio-atomyah.vercel.app//api/item/readall`, { next: { revalidate: 30 } });
+      const Items = await res.json();
+      console.log('□', Items) // {message: 'アイテム全件読み取り成功', allItems: Array(6)} →allItems →0:{_id:'656806a7..},→1:{_id:'6568と表示．
+                             // api/item/readall.tsの21行目から来ている↑
+      setAllItems(Items.allItems) // setAllItems(Items)だとmapで’allItems.map is not a function’エラー．
+                                  // Itemsはオブジェクトなのでその配下のallItems配列をセットしなければならない．
+    };
+
+    fetchData();
+
     const randomNum: number = Math.floor(Math.random() * 100);
     const randomNumStr: string = String(randomNum);
-    console.log("■");
-    console.log(randomNumStr);
+    // console.log("■");
+    // console.log(randomNumStr);
 
     setSplashNum(randomNumStr); // ${splashNum}に入れるsplashNum変数を格納
   }, []);
 
-  console.log("▲");
-  console.log(splashNum);
+    console.log('▽', allItems); // 40行目と同じ結果．
+                                 // allItems:Array(6)と配列なので、allItems[]の中の6つのアイテムデータをmap()で取り出す．
+
+
 
   return (
     <div className={styles.container}>
@@ -75,118 +89,35 @@ export default function Home() {
       <section className={styles.gallery}>
         {/* カード */}
         <Grid container alignItems='center' justifyContent='center' spacing={2}>
-          <Grid  item lg={3} md={4} sm={6}>
-              <Box sx={{ padding: '2px', margin: '2px' }}>
-              {/* カードの画像は1100px,750pxと決め打ち */}
-              <Link href="/">
-                <Image
-                  className={styles.cardImg}
-                  src="/project1_1100x750.png"
-                  alt=""
-                  width={1100}
-                  height={750}
-                />
-              </Link>
-              </Box>   
-              <Box sx={{ padding: '2px', margin: '2px' }}>
+          {allItems.map((item) => (
+            <Grid item lg={3} md={4} sm={6} key={item._id.toString()}>
+                <Box sx={{ padding: '2px', margin: '2px' }}>
+                {/* カードの画像は1100px,750pxと決め打ち */}
+                <Link href={`item/${item._id}`}>
+                  <Image
+                    className={styles.cardImg}
+                    src={`/${item.image}`}
+                    alt=""
+                    width={1100}
+                    height={750}
+                  />
+                </Link>
+                </Box> 
+                <Box sx={{ padding: '2px', margin: '2px' }}>
                 <Typography align="center" fontSize={16}>
-                  X(旧Twitter)ボット
+                  {item.title}
                 </Typography>
                 <Box p={0.5} sx={{color:'dark', fontSize:'13', textAlign: 'left'}}>
-                  AWS Lambda, API Gateway, DynamoDBとTwitter account activity
-                  APIで構築
+                  {item.description.length > 80 ? item.description.substring(0, 80) + "..." : item.description}
                   {`　`}
                   <br />
                   <Box mr={1} sx={{color:'blue', fontSize:'14', textAlign: 'right'}}>
-                  <Link href="#">＞ READ MORE</Link>
+                  <Link href={`item/${item._id}`}>＞ READ MORE</Link>
                   </Box>
                 </Box>
-              </Box>
-          </Grid>
-          <Grid  item lg={3} md={4} sm={6}>
-              <Box sx={{ padding: '2px', margin: '2px' }}>
-              {/* カードの画像は1100px,750pxと決め打ち */}
-              <Link href="/">
-                <Image
-                  className={styles.cardImg}
-                  src="/project1_1100x750.png"
-                  alt=""
-                  width={1100}
-                  height={750}
-                />
-              </Link>
-              </Box>   
-              <Box sx={{ padding: '2px', margin: '2px' }}>
-                <Typography align="center" fontSize={16}>
-                  X(旧Twitter)ボット
-                </Typography>
-                <Box p={0.5} sx={{color:'dark', fontSize:'13', textAlign: 'left'}}>
-                  AWS Lambda, API Gateway, DynamoDBとTwitter account activity
-                  APIで構築
-                  {`　`}
-                  <br />
-                  <Box mr={1} sx={{color:'blue', fontSize:'14', textAlign: 'right'}}>
-                  <Link href="#">＞ READ MORE</Link>
-                  </Box>
-                </Box>
-              </Box>
-          </Grid>
-          <Grid  item lg={3} md={4} sm={6}>
-              <Box sx={{ padding: '2px', margin: '2px' }}>
-              {/* カードの画像は1100px,750pxと決め打ち */}
-              <Link href="/">
-                <Image
-                  className={styles.cardImg}
-                  src="/project1_1100x750.png"
-                  alt=""
-                  width={1100}
-                  height={750}
-                />
-              </Link>
-              </Box>   
-              <Box sx={{ padding: '2px', margin: '2px' }}>
-                <Typography align="center" fontSize={16}>
-                  X(旧Twitter)ボット
-                </Typography>
-                <Box p={0.5} sx={{color:'dark', fontSize:'13', textAlign: 'left'}}>
-                  AWS Lambda, API Gateway, DynamoDBとTwitter account activity
-                  APIで構築
-                  {`　`}
-                  <br />
-                  <Box mr={1} sx={{color:'blue', fontSize:'14', textAlign: 'right'}}>
-                  <Link href="#">＞ READ MORE</Link>
-                  </Box>
-                </Box>
-              </Box>
-          </Grid>
-          <Grid  item lg={3} md={4} sm={6}>
-              <Box sx={{ padding: '2px', margin: '2px' }}>
-              {/* カードの画像は1100px,750pxと決め打ち */}
-              <Link href="/">
-                <Image
-                  className={styles.cardImg}
-                  src="/project1_1100x750.png"
-                  alt=""
-                  width={1100}
-                  height={750}
-                />
-              </Link>
-              </Box>   
-              <Box sx={{ padding: '2px', margin: '2px' }}>
-                <Typography align="center" fontSize={16}>
-                  X(旧Twitter)ボット
-                </Typography>
-                <Box p={0.5} sx={{color:'dark', fontSize:'13', textAlign: 'left'}}>
-                  AWS Lambda, API Gateway, DynamoDBとTwitter account activity
-                  APIで構築
-                  {`　`}
-                  <br />
-                  <Box mr={1} sx={{color:'blue', fontSize:'14', textAlign: 'right'}}>
-                  <Link href="#">＞ READ MORE</Link>
-                  </Box>
-                </Box>
-              </Box>
-          </Grid>
+              </Box>  
+            </Grid>
+          ))}
         </Grid>
 
 
@@ -195,3 +126,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home

@@ -22,7 +22,16 @@ const createItem = async(req: ExtendedNextApiRequestItem, res: NextApiResponse<R
 
     try {
         await connectDB()
-        console.log(req.body)
+        console.log('□', req.body)
+        // 表示 ↓
+        // □ {
+        //     title: 'ダミー',
+        //     image: 'project01.png',
+        //     description: 'ダミーダミーダミーダミーダミーダミー・・・',
+        //     email: 'atom@example..'
+        //   }
+        // emailはmiddleware.tsの41行目req.body.email = (decoded as DecodedType).emailで追加された．
+
         await ItemModel.create(req.body)
         res.status(200).json({ message: "アイテム作成成功" });
     }catch(err){

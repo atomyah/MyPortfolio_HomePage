@@ -29,7 +29,7 @@ const deleteItem = async(req: ExtendedNextApiRequestItem, res: NextApiResponse<R
             //     title: 'ユーザー判定テスト',
             //     image: 'ユーザー判定テスト',
             //     description: 'ユーザー判定テスト',
-            //     email: 'atom@yah.bz' ← emailだけmiddleware.tsから渡されたreq.body.email(decoded.email)になっている．
+            //     email: 'atom@example...' ← emailだけmiddleware.tsから渡されたreq.body.email(decoded.email)になっている．
             //   },
     try {
         await connectDB()

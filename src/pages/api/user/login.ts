@@ -38,11 +38,20 @@ interface SavedUserDataType extends UserDataType {
 const loginUser = async(req: ExtendedNextApiRequestUser, res: NextApiResponse<ResMessageType>) => {
     try {
         await connectDB()
-        console.log(req.body)
+        // console.log(req.body)
         const savedUserData: SavedUserDataType | null = await UserModel.findOne({email: req.body.email}); 
         // formからPOSTされたreqのreq.body.emailがMongoDBのemailフィールドに存在するかをfindしてる．
         // つまりユーザーが存在していればsavedUserDataにUserオブジェクトが格納される，
-        console.log(savedUserData)
+        
+        // console.log(savedUserData)
+        // ↓ このように表示される.
+        // {
+        // _id: new ObjectId('6568051335cb1609ceb947d7'),
+        // name: 'テストユーザー',
+        // email: 'atom@example..',
+        // password: 'aaa...',
+        // __v: 0
+        // }
 
         if(savedUserData){
             //ユーザーデータが存在する場合
@@ -53,7 +62,7 @@ const loginUser = async(req: ExtendedNextApiRequestUser, res: NextApiResponse<Re
                 }
                 // JWTトークンを発行jwt.sign()しtokenに格納．
                 const token = jwt.sign(payload, secret_key, {expiresIn: '23h'})
-                console.log(token)
+                //console.log(token)
                 return res.status(200).json({message: "ログイン成功", token: token})
                 // {
                 // "message": "ログイン成功",

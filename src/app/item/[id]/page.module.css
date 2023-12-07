@@ -1,0 +1,18 @@
+/* 個別アイテムページのCSS */
+
+/* <Header />を包むコンテナ */
+.navContainer {
+    position: absolute;
+    top: 0;
+    right:3%;
+    transform: translate(0%,-60%);
+    padding-bottom: 50px;
+}
+
+/* ↓ これでobject-fit:coverみたいになる。 */
+.cardImg {
+    width: 100%;
+    height: auto;
+    padding: 2px;
+    border-radius: 5px 5px 0 0;
+  }
