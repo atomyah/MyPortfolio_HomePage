@@ -18,8 +18,6 @@ bun dev
 
 app/page.tsx を編集することでページを編集できます。ファイルを編集すると、ページは自動的に更新されます。
 
-このプロジェクトでは、[`next/font`](https://nextjs.org/docs/basic-features/font-optimization)を使用して Inter というカスタム Google フォントを自動的に最適化してロードします。
-
 ## 詳細を学ぶ
 
 Next.js について詳しく知りたい場合は、以下のリソースをご覧ください：
