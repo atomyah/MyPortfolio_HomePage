@@ -1,6 +1,6 @@
-//app/item/update/updated/page.tsx 編集完了！ページ
-// 編集(item/update/[id]/page.tsx_<UpdateForm.tsx>で編集成功すると)
-// router.push("https://my-portfolio-atomyah.vercel.app/item/update/updated") でこのページに飛ばす．
+//app/item/update/created/page.tsx 追加完了！ページ
+// 追加(item/create/page.tsx_で追加成功すると)
+// router.push("https://my-portfolio-atomyah.vercel.app/item/create/created") でこのページに飛ばす．
 
 import React from "react";
 import Header from "../../../Header";
@@ -29,7 +29,7 @@ const thanks = () => {
           sx={{ backgroundColor: "#fff", height: 100, width: "auto" }}
         >
           <br />
-          編集完了！
+          追加完了！
           <br />
           <br />
           <Link href="/">トップページで確認</Link>

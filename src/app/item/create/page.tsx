@@ -7,18 +7,22 @@ import {
     Button,
     Container,
     FormControl,
+    Link,
     Stack,
     TextField,
     Typography,
   } from "@mui/material";
+import { MuiFileInput } from 'mui-file-input';
 import { SubmitHandler, useForm } from "react-hook-form";
 import Header from "../../Header";
 //import { useRouter } from "next/navigation"; //"next/router"ではなくなった．
 import styles from "./page.module.css";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useRouter } from "next/navigation";
 import AdminHeader from '@/app/components/AdminHeader';
 import useAuth from '@/utils/useAuth';
+import ImgInput from '@/app/components/ImgInput';
 
 
 // フォームの型
@@ -29,14 +33,17 @@ type CreateForm = {
   email?: string,
 };
 
+
+
 // バリーデーションルール（yupを使ってルールを簡単に作成）
 const schema = yup.object({
     title: yup
-    .string()
-    .max(20, "20文字以下で入力してください")
-    .required("必須項目です"),
+      .string()
+      .max(20, "20文字以下で入力してください")
+      .required("必須項目です"),
     image: yup
       .string()
+      .max(500, "500文字以下で入力してください")
       .required("必須項目です"),
     description: yup
       .string()
@@ -45,7 +52,12 @@ const schema = yup.object({
 });
 
 const CreatePage = () => {
-  const [createSuccess, setCreateSuccess] = useState<boolean>(false);
+  //const [createSuccess, setCreateSuccess] = useState<boolean>(false);
+  const [title, setTitle] = useState("")
+  const [image, setImage] = useState("")
+  const [description, setDescription] = useState("")
+  const router = useRouter();
+  
 
     // react-hook-formライブラリから,{...register("email")}の形で各入力欄を命名し、
     // ButtonタグにonClick={handleSubmit(onSubmit)}と書くだけで送信処理onSubmit:...を発火できる
@@ -53,11 +65,12 @@ const CreatePage = () => {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors }, // バリデーションエラーの際、エラーメッセージを表示させるために必要
   } = useForm<CreateForm>({
     // yupのスキーマをReact Hook Formに適用．
     resolver: yupResolver(schema),
-    defaultValues: {
+    defaultValues: { // やはりコレないと追加後フォームリセットされない。
       title: '',
       image: '',
       description: '',
@@ -66,7 +79,7 @@ const CreatePage = () => {
 
   // フォーム送信時の処理（バリデーションOKな時に実行される）
   const onSubmit: SubmitHandler<CreateForm> = async (data) => {
-    const response = await fetch("https://my-portfolio-atomyah.vercel.app//api/item/create", {
+    const response = await fetch("https://my-portfolio-atomyah.vercel.app/api/item/create", {
     method: "POST",
     headers: {
         "Content-Type": "application/json",
@@ -79,8 +92,9 @@ const CreatePage = () => {
     console.log('■', data) // Object email:"yyy@yyyy.com" name:"test" password:"...."
     console.log('▲', JSON.stringify(data)) // {"name":"test", "email":"yyy@yyyy.com", "password":"..."}
     if (response.status === 200) {
-        setCreateSuccess(true);
-        reset() // フォームのリセット
+        //setCreateSuccess(true);
+        //reset() // フォームのリセット
+        router.push("https://my-portfolio-atomyah.vercel.app/item/create/created") // 「追加完了！」メッセージページ
     } else {
         alert("正常に追加できませんでした");
         reset() // フォームのリセット
@@ -89,8 +103,7 @@ const CreatePage = () => {
 
   // utils/useAuth.tsのJWT.verifyからユーザーemailを取得する.
   const loginUser = useAuth();
-  console.log('●loginUserは', loginUser) // ●loginUserは atom@...bz と表示.
-
+  //console.log('●loginUserは', loginUser) // ●loginUserは atom@...bz と表示.
 
   if(loginUser){
     return (
@@ -109,7 +122,13 @@ const CreatePage = () => {
             アイテム追加ページ
           </Typography>
             <br />
-        {createSuccess && <p style={{ color: 'mediumvioletred', fontSize: '16px' }}>アイテム追加が完了しました</p>}
+        {/* {createSuccess && 
+            <div>
+              <p style={{ color: 'mediumvioletred', fontSize: '16px' }}>アイテム追加が完了しました</p>
+                <br />
+                <span><Link href="/">トップページで確認</Link></span>
+            </div>
+        } */}
         </Box>
         <Box>
           <FormControl fullWidth>
@@ -123,7 +142,13 @@ const CreatePage = () => {
                 {...register("title")}
                 error={"title" in errors}
                 helperText={errors.title?.message}
+                value={title}
+                onChange={(e:React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
               />
+
+              {/* ↓ Cludinaryへのアップロードコンポーネント */}
+              <ImgInput setImage={setImage} />
+
               <TextField
                 size="small"
                 required
@@ -133,6 +158,8 @@ const CreatePage = () => {
                 {...register("image")}
                 error={"image" in errors}
                 helperText={errors.image?.message}
+                value={image}
+                onChange={(e:React.ChangeEvent<HTMLInputElement>) => setImage(e.target.value)}
               />
               <TextField
                 size="small"
@@ -144,6 +171,8 @@ const CreatePage = () => {
                 {...register("description")}
                 error={"description" in errors}
                 helperText={errors.description?.message}
+                value={description}
+                onChange={(e:React.ChangeEvent<HTMLInputElement>) => setDescription(e.target.value)}
               />
             </Stack>
             <Stack alignItems="center" mt={3}>

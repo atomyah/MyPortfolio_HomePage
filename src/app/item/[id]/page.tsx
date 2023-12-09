@@ -19,7 +19,7 @@ const ReadSingleItem = async ( { params }: { params: { id: string } } ) => {
     // コンソールで確認すると↓、"△ { id: '656809a035cb1609ceb947e1' }" と表示される．
     console.log('△', params) 
 
-    const res = await fetch(`https://my-portfolio-atomyah.vercel.app//api/item/${params.id}`, { next: { revalidate: 30 } });
+    const res = await fetch(`https://my-portfolio-atomyah.vercel.app/api/item/${params.id}`, { cache: "no-store" });
     const singleItem = await res.json();
 
     console.log('▽', singleItem)
@@ -53,7 +53,7 @@ const ReadSingleItem = async ( { params }: { params: { id: string } } ) => {
                 <Link href={`item/${singleItem.singleItem._id}`}>
                   <Image
                     className={styles.cardImg}
-                    src={`/${singleItem.singleItem.image}`}
+                    src={singleItem.singleItem.image}
                     alt=""
                     width={1100}
                     height={750}
@@ -62,10 +62,12 @@ const ReadSingleItem = async ( { params }: { params: { id: string } } ) => {
             </Box>
             <br />
             <Box p={1} sx={{color:'dark', fontSize:'16', textAlign: 'left'}}>
-                {singleItem.singleItem.description}
+              {/* description表示箇所はサニタイズ解除↓ 文章の最初の80字以内にHTMLタグ入れると
+              トップページのdescription表示箇所にはHTMLタグが見えてしまうから注意.*/}
+              <div dangerouslySetInnerHTML={{ __html: singleItem.singleItem.description }} />
             </Box>
-            <Box mb={6} mt={6} sx={{backgroundColor: '#eee', paddingLeft:'50px',paddingRight:'50px',paddingBottom:'30px',paddingTop:'10px'}}>
-              <Typography>【管理用】</Typography>
+            <Box mb={6} mt={6} sx={{backgroundColor:'#eee', paddingLeft:'50px',paddingRight:'50px',paddingBottom:'30px',paddingTop:'10px'}}>
+              <Typography align="center">【管理用】</Typography>
               <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Button variant="contained" color="success" href={`/item/update/${singleItem.singleItem._id}`}>
                   アイテム編集ページ

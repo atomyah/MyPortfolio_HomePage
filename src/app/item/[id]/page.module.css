@@ -3,9 +3,9 @@
 /* <Header />を包むコンテナ */
 .navContainer {
     position: absolute;
-    top: 0;
+    top: 2%;
     right:3%;
-    transform: translate(0%,-60%);
+    transform: translate(0%, -60%);
     padding-bottom: 50px;
 }
 

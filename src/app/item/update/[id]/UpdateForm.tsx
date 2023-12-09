@@ -20,6 +20,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import AdminHeader from '@/app/components/AdminHeader';
 import { useRouter } from "next/navigation";
 import useAuth from '@/utils/useAuth';
+import ImgInput from '@/app/components/ImgInput';
 
 
 
@@ -49,20 +50,25 @@ type UpdateForm = {
 // バリーデーションルール（yupを使ってルールを簡単に作成）
 const schema = yup.object({
     title: yup
-    .string()
-    .max(20, "20文字以下で入力してください")
-    .required("必須項目です"),
+        .string()
+        .max(20, "20文字以下で入力してください")
+        .required("必須項目です"),
     image: yup
-      .string()
-      .required("必須項目です"),
+        .string()
+        .max(500, "500文字以下で入力してください")
+        .required("必須項目です"),
     description: yup
-      .string()
-      .required("必須項目です"),
+        .string()
+        .min(200, "最低２００文字含めてください")
+        .required("必須項目です"),
 });
 
 
 const UpdateForm = ({ singleItem }: UpdateFormProps) => {
     // const [updateSuccess, setUpdateSuccess] = useState<boolean>(false);
+    const [title, setTitle] = useState(singleItem?.singleItem?.title)
+    const [image, setImage] = useState(singleItem?.singleItem?.image)
+    const [description, setDescription] = useState(singleItem?.singleItem?.description)
     const [isAuthorized, setIsAuthorized] = useState<boolean | null>(null);
     const router = useRouter();
 
@@ -75,26 +81,17 @@ const UpdateForm = ({ singleItem }: UpdateFormProps) => {
       } = useForm<UpdateForm>({
         // yupのスキーマをReact Hook Formに適用．
         resolver: yupResolver(schema),
-        defaultValues: {
-            title: singleItem?.singleItem?.title || '',
-            image: singleItem?.singleItem?.image || '',
-            description: singleItem?.singleItem?.description || '',
-        },
+        // defaultValues: {
+        //     title: singleItem?.singleItem?.title || '',
+        //     image: singleItem?.singleItem?.image || '',
+        //     description: singleItem?.singleItem?.description || '',
+        // },
     });
-
-    // 編集ボタンをクリックした後、フォーム内のValue値を更新する．
-    // useEffect(() => {
-    //     if (singleItem) {
-    //       setValue('title', singleItem.singleItem.title || '');
-    //       setValue('image', singleItem.singleItem.image || '');
-    //       setValue('description', singleItem.singleItem.description || '');
-    //     }
-    // }, [singleItem, setValue]);
 
 
       // フォーム送信時の処理（バリデーションOKな時に実行される）
     const onSubmit: SubmitHandler<UpdateForm> = async (data) => {
-        const response = await fetch(`https://my-portfolio-atomyah.vercel.app//api/item/update/${singleItem.singleItem._id}`, {
+        const response = await fetch(`https://my-portfolio-atomyah.vercel.app/api/item/update/${singleItem.singleItem._id}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -108,7 +105,7 @@ const UpdateForm = ({ singleItem }: UpdateFormProps) => {
         console.log('▲', JSON.stringify(data)) // {"name":"test", "email":"yyy@yyyy.com", "password":"..."}
         if (response.status === 200) {
             // setUpdateSuccess(true);
-            router.push("https://my-portfolio-atomyah.vercel.app//item/update/updated") // 「編集完了！」メッセージページ
+            router.push("https://my-portfolio-atomyah.vercel.app/item/update/updated") // 「編集完了！」メッセージページ
         } else {
             alert("正常に編集できませんでした");
             reset() // フォームのリセット
@@ -117,7 +114,6 @@ const UpdateForm = ({ singleItem }: UpdateFormProps) => {
 
     //// 認証チェック. JWTデコードemailとログインユーザーemailが同じなら削除ページを表示.////
     //// useEffect()で非同期処理をしないと、}else{<h1>権限がありません</h1>}が一瞬表示されてしまう.////
-
     // utils/useAuth.tsのJWT.verifyからユーザーemailを取得する.
     const loginUser = useAuth();
     console.log('●loginUserは', loginUser) // ●loginUserは atom@...bz と表示.
@@ -152,7 +148,13 @@ const UpdateForm = ({ singleItem }: UpdateFormProps) => {
                             {...register("title")}
                             error={"title" in errors}
                             helperText={errors.title?.message}
+                            value={title}
+                            onChange={(e:React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
                         />
+
+                        {/* ↓ Cludinaryへのアップロードコンポーネント */}
+                        <ImgInput setImage={setImage} />
+                        
                         <TextField
                             size="small"
                             required
@@ -162,6 +164,8 @@ const UpdateForm = ({ singleItem }: UpdateFormProps) => {
                             {...register("image")}
                             error={"image" in errors}
                             helperText={errors.image?.message}
+                            value={image}
+                            onChange={(e:React.ChangeEvent<HTMLInputElement>) => setImage(e.target.value)}
                         />
                         <TextField
                             size="small"
@@ -173,6 +177,8 @@ const UpdateForm = ({ singleItem }: UpdateFormProps) => {
                             {...register("description")}
                             error={"description" in errors}
                             helperText={errors.description?.message}
+                            value={description}
+                            onChange={(e:React.ChangeEvent<HTMLInputElement>) => setDescription(e.target.value)}
                         />
                     </Stack>
                     <Stack alignItems="center" mt={3}>
@@ -193,8 +199,6 @@ const UpdateForm = ({ singleItem }: UpdateFormProps) => {
             </>
 
         )
-    }else{
-        return <h1>編集権限がありません。</h1>
     }
 }
 

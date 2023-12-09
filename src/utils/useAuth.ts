@@ -31,11 +31,12 @@ const useAuth = () => {
             const decoded = jwt.verify(token as string, secret_key)
             setLoginUser((decoded as DecodedType).email)
         }catch(error){
+            alert('権限がありません。おそらくトークンの失効です。ログインして下さい')
             router.push("/user/login")
         }
     }, [router])
 
-    console.log('●loginUserは', loginUser)
+    //console.log('●loginUserは', loginUser)
     return loginUser; // ログインユーザーのemailが格納されたloginUserを他のファイルで使用できるようにするためreturnしている．
 }
 

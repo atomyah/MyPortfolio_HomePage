@@ -14,7 +14,7 @@ pnpm dev
 bun dev
 ```
 
-ブラウザで https://my-portfolio-atomyah.vercel.app/ を開いて結果を確認します。
+ブラウザで https://my-portfolio-atomyah.vercel.app を開いて結果を確認します。
 
 app/page.tsx を編集することでページを編集できます。ファイルを編集すると、ページは自動的に更新されます。
 

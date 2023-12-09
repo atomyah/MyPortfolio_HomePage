@@ -22,7 +22,7 @@ const UpdateSingleItem = async ( { params }: { params: { id: string } } ) => {
     // コンソールで確認すると↓、"△ { id: '656809a035cb1609ceb947e1' }" と表示される．
     console.log('△', params) 
 
-    const res = await fetch(`https://my-portfolio-atomyah.vercel.app//api/item/${params.id}`, { next: { revalidate: 30 } });
+    const res = await fetch(`https://my-portfolio-atomyah.vercel.app/api/item/${params.id}`, { next: { revalidate: 30 } });
     const singleItem = await res.json();
     
     console.log('▽', singleItem)

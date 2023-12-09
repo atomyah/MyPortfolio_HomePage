@@ -21,6 +21,11 @@ const Header = () => {
             趣味
           </Link>
         </li>
+        <li>
+          <Link href="/user/login" className={styles.links}>
+            ログイン
+          </Link>
+        </li>
       </ul>
     </header>
   );

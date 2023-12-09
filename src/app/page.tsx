@@ -30,7 +30,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch(`https://my-portfolio-atomyah.vercel.app//api/item/readall`, { next: { revalidate: 30 } });
+      const res = await fetch(`https://my-portfolio-atomyah.vercel.app/api/item/readall`, { cache: "no-store" });
       const Items = await res.json();
       console.log('□', Items) // {message: 'アイテム全件読み取り成功', allItems: Array(6)} →allItems →0:{_id:'656806a7..},→1:{_id:'6568と表示．
                              // api/item/readall.tsの21行目から来ている↑
@@ -96,7 +96,7 @@ const Home = () => {
                 <Link href={`item/${item._id}`}>
                   <Image
                     className={styles.cardImg}
-                    src={`/${item.image}`}
+                    src={item.image}
                     alt=""
                     width={1100}
                     height={750}
