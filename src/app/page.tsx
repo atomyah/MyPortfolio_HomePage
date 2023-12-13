@@ -30,7 +30,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch(`https://my-portfolio-atomyah.vercel.app/api/item/readall`, { cache: "no-store" });
+      const res = await fetch(`http://localhost:3000/api/item/readall`, { cache: "no-store" });
       const Items = await res.json();
       console.log('□', Items) // {message: 'アイテム全件読み取り成功', allItems: Array(6)} →allItems →0:{_id:'656806a7..},→1:{_id:'6568と表示．
                              // api/item/readall.tsの21行目から来ている↑

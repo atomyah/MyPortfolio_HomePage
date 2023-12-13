@@ -79,7 +79,7 @@ const CreatePage = () => {
 
   // フォーム送信時の処理（バリデーションOKな時に実行される）
   const onSubmit: SubmitHandler<CreateForm> = async (data) => {
-    const response = await fetch("https://my-portfolio-atomyah.vercel.app/api/item/create", {
+    const response = await fetch("http://localhost:3000/api/item/create", {
     method: "POST",
     headers: {
         "Content-Type": "application/json",
@@ -94,7 +94,7 @@ const CreatePage = () => {
     if (response.status === 200) {
         //setCreateSuccess(true);
         //reset() // フォームのリセット
-        router.push("https://my-portfolio-atomyah.vercel.app/item/create/created") // 「追加完了！」メッセージページ
+        router.push("http://localhost:3000/item/create/created") // 「追加完了！」メッセージページ
     } else {
         alert("正常に追加できませんでした");
         reset() // フォームのリセット

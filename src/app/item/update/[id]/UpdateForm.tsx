@@ -91,7 +91,7 @@ const UpdateForm = ({ singleItem }: UpdateFormProps) => {
 
       // フォーム送信時の処理（バリデーションOKな時に実行される）
     const onSubmit: SubmitHandler<UpdateForm> = async (data) => {
-        const response = await fetch(`https://my-portfolio-atomyah.vercel.app/api/item/update/${singleItem.singleItem._id}`, {
+        const response = await fetch(`http://localhost:3000/api/item/update/${singleItem.singleItem._id}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -105,7 +105,7 @@ const UpdateForm = ({ singleItem }: UpdateFormProps) => {
         console.log('▲', JSON.stringify(data)) // {"name":"test", "email":"yyy@yyyy.com", "password":"..."}
         if (response.status === 200) {
             // setUpdateSuccess(true);
-            router.push("https://my-portfolio-atomyah.vercel.app/item/update/updated") // 「編集完了！」メッセージページ
+            router.push("http://localhost:3000/item/update/updated") // 「編集完了！」メッセージページ
         } else {
             alert("正常に編集できませんでした");
             reset() // フォームのリセット

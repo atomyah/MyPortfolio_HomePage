@@ -1,6 +1,6 @@
 //app/item/update/updated/page.tsx 編集完了！ページ
 // 編集(item/update/[id]/page.tsx_<UpdateForm.tsx>で編集成功すると)
-// router.push("https://my-portfolio-atomyah.vercel.app/item/update/updated") でこのページに飛ばす．
+// router.push("http://localhost:3000/item/update/updated") でこのページに飛ばす．
 
 import React from "react";
 import Header from "../../../Header";
