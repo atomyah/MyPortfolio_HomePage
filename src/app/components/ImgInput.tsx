@@ -43,8 +43,8 @@ const ImgInput = (props:ImageInputPropsType) => {
                 body: data,
             })
             const jsonData = await response.json()
-            console.log('〇ImgInput.tsxのjsonDataは',jsonData);
-            console.log('〇ImgInput.tsxのjsonData.urlは',jsonData.url);
+            //console.log('〇ImgInput.tsxのjsonDataは',jsonData);
+            //console.log('〇ImgInput.tsxのjsonData.urlは',jsonData.url);
             await props.setImage(jsonData.url)
             alert("画像アップロード成功")
         }catch(err){
@@ -73,57 +73,3 @@ const ImgInput = (props:ImageInputPropsType) => {
 }
 export default ImgInput
 
-
-
-
-// import { NextApiResponse } from "next";
-// import { CldUploadButton, CldImage } from "next-cloudinary";
-
-// // 型定義.secure_url用
-// interface NextApiResponsedImgURL extends NextApiResponse {
-//     secure_url: string,
-// }
-
-// export default function ImgInput() {
-
-//     const handleSuccess = (result:any) => {
-//         // アップロードが成功したら、response から画像の URL を取得
-//         const imageUrl = result.secure_url;
-//         console.log('▼Uploaded Image URL:', imageUrl);
-
-//         // ここで取得した URL をどう表示するかはアプリケーションの要件によります
-//         // 例えば、state に設定して画面に表示するなど
-//     };
-
-//   return (
-//     <div>    
-//       <CldUploadButton
-//         options={{ multiple: true }}
-//         uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_PRESET_NAME}
-//         onUpload={handleSuccess}
-//       >
-//         <span>
-//           Upload
-//         </span>
-//       </CldUploadButton>
-//       <br />
-//     </div>
-//   );
-// }
-
-
-
-// const handleChangeFile = (newFile: File | null) => {
-//     if(newFile){
-//         seImageFile(newFile);
-//     }
-// };
-// <MuiFileInput
-// inputProps={{ accept: "image/png, image/gif, image/jpeg" }}
-// variant="outlined"
-// label="画像"
-// value={imageFile} 
-// onChange={handleChangeFile}
-// onClick={handleClidk}
-// disabled={!imageFile}
-// />

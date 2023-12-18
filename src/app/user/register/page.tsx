@@ -69,7 +69,7 @@ const Register = () => {
 
     // フォーム送信時の処理（バリデーションOKな時に実行される）
     const onSubmit: SubmitHandler<RegisterForm> = async (data) => {
-        const response = await fetch("https://my-portfolio-atomyah.vercel.app/api/user/register", { // api/user/registerではダメだった…
+        const response = await fetch("https://my-portfolio-atomyah.vercel.app/api/user/register", { // /api/user/registerでは動作せず…
         method: "POST",
         headers: {
             "Content-Type": "application/json",

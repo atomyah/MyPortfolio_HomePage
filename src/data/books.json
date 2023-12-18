@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "bookImage": "/kindle01.jpg",
+        "bookTitle": "Learning MVC architecture with PHP",
+        "bookSubTitle": "～ to exit beginners, before entering frameworks",
+        "bookURL":"https://amzn.to/3RI69Su"
+    },
+    {
+        "id": 2,
+        "bookImage": "/kindle02.jpg",
+        "bookTitle": "Azure Active DirectoryとOffice 365でクラウドネイティブな企業インフラ構築術",
+        "bookSubTitle": "　　",
+        "bookURL":"https://amzn.to/3tcClUR"
+    },
+    {
+        "id": 3,
+        "bookImage": "/kindle03.jpg",
+        "bookTitle": "AWS Lambda DynamoDB API GatewayでTwitterボット作成",
+        "bookSubTitle": "～Twitter Account Activity API対応～",
+        "bookURL":"https://amzn.to/481zVr7"
+    },
+    {
+        "id": 4,
+        "bookImage": "/kindle04.jpg",
+        "bookTitle": "JAMStackを学ぼう Gatsby4、TailwindCSS、Gatsby Cloudでつくる企業サイト",
+        "bookSubTitle": "　　",
+        "bookURL":"https://amzn.to/483mZkK"
+    },
+    {
+        "id": 5,
+        "bookImage": "/kindle05.jpg",
+        "bookTitle": "Gatsby5前編：最新Gatsbyでつくるコーポレートサイト",
+        "bookSubTitle": "Gatsby Functions, Slice API, DSGなど新機能搭載",
+        "bookURL":"https://amzn.to/41qBKvi"
+    },
+    {
+        "id": 6,
+        "bookImage": "/kindle06.jpg",
+        "bookTitle": "Gatsby5前編：最新GatsbyとmicroCMSでつくるコーポレートサイト",
+        "bookSubTitle": "～サイト内検索機能付き～",
+        "bookURL":"https://amzn.to/3tdmV2H"
+    }
+]

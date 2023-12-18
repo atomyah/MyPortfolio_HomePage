@@ -1,20 +1,29 @@
-/* スプラッシュイメージを囲む<figure>タグ */
+/* 背景画像指定 */
+.container {
+  background-image: url(/topBackground.png); 
+  background-repeat:no-repeat;
+  background-size:  contain; 
+}
+
+/* topImageを囲む<figure>タグ */
 .figure {
+  width: 100%;
+  height: auto;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: 0.3;
+  opacity: 0.1;
 }
 
 /* 文字を画像の中央に配置
 参考：https://yoncoichi.com/text-on-the-image/ */
 .title {
   position: absolute;
-  top:15%;
+  top:10%;
   left:50%;
   transform: translate(-50%,-50%);
-  font-size: 1.6em;
+  font-size: 1.4em;
   font-weight: 600;
   font-family:sans-serif;
   color: rgb(1, 69, 60)
@@ -64,6 +73,27 @@ MUIのGridレイアウトで必要なくなった
   border-radius: 5px 5px 0 0;
 }
 
+.booksGallery{
+  display: inline-block;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 90%;
+  height: auto;
+  overflow: hidden;
+  gap: 1px;
+  margin: 0 auto; /* .galleryコンテナ自体を中央寄せ */
+  text-align: center;
+}
+
+.booksGrid {
+  width: 100%;
+  display: inline-block;
+  vertical-align: top;
+}
+
 /* .cardContent {
   MUIのBoxレイアウトで必要なくなった
 }
@@ -90,31 +120,56 @@ lg – 大: 1200px ～
 xl – 特大: 1536px ～ */
 /* ///////////// */
 
+/* lg – 大: 1200px */
+@media (max-width: 1200px) {
+  .title {
+    position: absolute;
+    top:6%;
+    left:50%;
+    transform: translate(-50%,-110%);
+    font-size: 1.3em;
+    font-weight: 600;
+    color: rgb(1, 69, 60)
+  }
+}
+
+
+/* md – 中: 900px */
+@media (max-width: 900px) {
+  .title {
+    position: absolute;
+    top:6%;
+    left:50%;
+    transform: translate(-50%,-110%);
+    font-size: 1.3em;
+    font-weight: 600;
+    color: rgb(1, 69, 60)
+  }
+}
+
 /* タブレット */
 @media (max-width: 600px) {
   .title {
     position: absolute;
-    top:7%;
+    top:4%;
     left:50%;
-    transform: translate(-50%,-50%);
-    font-size: 1.4em;
+    transform: translate(-50%,-110%);
+    font-size: 1.3em;
     font-weight: 600;
     color: rgb(1, 69, 60)
   }
-
 }
 
 /* スマフォ */
-@media (max-width: 419px) {
+@media (max-width: 440px) {
   .title {
     position: absolute;
-    top:9%;
+    top:5%;
     left:50%;
-    transform: translate(-50%,-50%);
-    font-size: 1.1em;
-    font-weight: 600;
+    transform: translate(-50%,-150%);
+    font-size: 1.0em;
+    font-weight: 400;
     color: rgb(1, 69, 60)
   }
-
 }
 

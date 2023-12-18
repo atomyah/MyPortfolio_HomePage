@@ -1,0 +1,23 @@
+/* 趣味ページのCSS */
+
+/* <Header />を包むコンテナ */
+.navContainer {
+    position: absolute;
+    top: 0;
+    right:3%;
+    transform: translate(0%,-60%);
+    padding-bottom: 50px;
+}
+
+.pianoIcon {
+    vertical-align: middle; /* 上下中央寄せ */
+    /* 画像のサイズ */
+    width: 20px;
+    height: 20px;
+    margin-right: 3px;
+}
+.pianoText {
+    display: inline-block; /* インライン要素にして横並びを実現 */
+    vertical-align: middle; /* 上下中央寄せ */
+    font-size: 1.1em;
+}

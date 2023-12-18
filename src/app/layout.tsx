@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import Footer from "./Footer";
 import "./globals.css";
 import styles from "./layout.module.css";
+import Loading from "./loading";
 import Script from 'next/script'
 import { Noto_Sans_JP } from "next/font/google";
 //          ↑
@@ -26,7 +28,9 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body>
-        <main className={styles.container}>{children}</main>
+        <main className={styles.container}>
+        <Suspense fallback={<Loading />}>{children}</Suspense>
+        </main>
         <Footer />
       </body>
     </html>

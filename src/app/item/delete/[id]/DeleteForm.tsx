@@ -71,8 +71,8 @@ const DeleteForm = ({ singleItem }: DeleteFormProps) => {
         },
         // body: JSON.stringify(data), 削除なのでbody渡しは不要
         });
-        console.log('■', data) // Object email:"yyy@yyyy.com" name:"test" password:"...."
-        console.log('▲', JSON.stringify(data)) // {"name":"test", "email":"yyy@yyyy.com", "password":"..."}
+        //console.log('■', data) // Object email:"yyy@yyyy.com" name:"test" password:"...."
+        //console.log('▲', JSON.stringify(data)) // {"name":"test", "email":"yyy@yyyy.com", "password":"..."}
         if (response.status === 200) {
             setDeleteSuccess(true);
             reset() // フォームのリセット
