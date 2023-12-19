@@ -1,3 +1,6 @@
+// src/app/hobby/page.tsx
+// 趣味ページ
+
 "use client";
 
 import {
@@ -5,7 +8,6 @@ import {
     Container,
     Grid,
     Typography,
-    Button,
   } from "@mui/material";
   import PianoIcon from '@mui/icons-material/Piano';
   import Header from "../Header";

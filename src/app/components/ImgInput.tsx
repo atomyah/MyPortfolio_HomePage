@@ -1,3 +1,6 @@
+// src/app/components/ImgInput.tsx
+// Cloudinaryに画像をアップロードするコンポーネント
+
 import React, {useState} from 'react'
 import cloudinary from 'next-cloudinary'
 import {
@@ -5,7 +8,6 @@ import {
     Button,
     Typography,
   } from "@mui/material";
-import { MuiFileInput } from 'mui-file-input';
 
 // 型定義
 type ImageInputPropsType = {
@@ -13,7 +15,6 @@ type ImageInputPropsType = {
 }
 
 const ImgInput = (props:ImageInputPropsType) => {
-      // 画像アップロードフォーム<MuiFileInput>で使用する.
     const [imageFile, seImageFile] = useState<File | null>(null);
 
     const handleChangeFile = (newFile: File | null) => {

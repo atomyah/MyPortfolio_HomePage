@@ -1,20 +1,19 @@
-// src/app/item/delete/DeleteForm.tsx 個別アイテム削除ページに埋め込むフォームコンポーネント
+// src/app/item/delete/DeleteForm.tsx 
+// 個別アイテム削除ページに埋め込むフォームコンポーネント.
+
 "use client";
 
 import React, { useState, useEffect } from 'react'
 import {
     Box,
     Button,
-    Container,
     FormControl,
     Link,
     Stack,
-    TextField,
-    Typography,
   } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Header from "../../../Header";
-//import { useRouter } from "next/navigation"; //"next/router"ではなくなった．
+//import { useRouter } from "next/navigation";
 import { useRouter } from "next/navigation";
 import useAuth from '@/utils/useAuth';
 
@@ -33,13 +32,14 @@ type singleItemDataType = {
 type DeleteFormProps = {
     singleItem: singleItemDataType;
 }
+
 // フォームの型
 type DeleteForm = {
     title: string,
     image: string,
     description: string,
     email?: string,
-  };
+};
 
 
 const DeleteForm = ({ singleItem }: DeleteFormProps) => {
@@ -69,10 +69,13 @@ const DeleteForm = ({ singleItem }: DeleteFormProps) => {
             // トークンを読み取り"authorization"フィールドをheadersに追加.
             // middleware.tsの27行目req.headers.authorizationで使う．Bearerの文字列は無くても良い．
         },
-        // body: JSON.stringify(data), 削除なのでbody渡しは不要
+        // body: JSON.stringify(data),
+        // ↑ 削除なのでbodyのデータ渡しは不要のためコメントアウト.
         });
-        //console.log('■', data) // Object email:"yyy@yyyy.com" name:"test" password:"...."
-        //console.log('▲', JSON.stringify(data)) // {"name":"test", "email":"yyy@yyyy.com", "password":"..."}
+
+        //console.log(data);  表示結果→ Object email:"yyy@yyyy.com" name:"test" password:"...."
+        //console.log(JSON.stringify(data)); 表示結果→  {"name":"test", "email":"yyy@yyyy.com", "password":"..."}
+        
         if (response.status === 200) {
             setDeleteSuccess(true);
             reset() // フォームのリセット
@@ -83,23 +86,29 @@ const DeleteForm = ({ singleItem }: DeleteFormProps) => {
         }
     };
 
-    //// 認証チェック. JWTデコードemailとログインユーザーemailが同じなら削除ページを表示.////
-    //// useEffect()で非同期処理をしないと、}else{<h1>権限がありません</h1>}が一瞬表示されてしまう.////
+    ////////////////////////////////////////////////////////////////////////////////////
+    //// 認証チェック. JWTデコードemailとログインユーザーemailが同じなら編集ページを表示.///
+    ////////////////////////////////////////////////////////////////////////////////////
 
     // utils/useAuth.tsのJWT.verifyからユーザーemailを取得する.
     const loginUser = useAuth();
-    console.log('●loginUserは', loginUser) // ●loginUserは atom@...bz と表示.
 
+    // console.log('●loginUserは、', loginUser) // ●loginUserは、atom@...bz と表示.
+
+    //// useEffect()で非同期処理をしないとreturn以下のHTMLが一瞬表示されてしまう.////
     useEffect(() => {
         // ユーザーの認証が完了したら権限を設定
         setIsAuthorized(loginUser === singleItem?.singleItem.email);
+
     }, [loginUser, singleItem]);
 
     if (isAuthorized === null) {
-        // 認証が完了していない場合はローディングまたは何も表示しない
+        // 認証が完了していない場合は何も表示しない
         return null;
     }    
-    //// 認証チェック. ここまで.////
+    ////////////////////////////////////////////////////////////////////////////////////
+    //// 認証チェック. ここまで.///
+    ////////////////////////////////////////////////////////////////////////////////////
     
     
 

@@ -1,4 +1,6 @@
+// src/app/user/register/page.tsx
 /* ユーザー登録ページ */
+
 "use client";
 
 import React, { useState } from 'react'
@@ -13,7 +15,7 @@ import {
   } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Header from "../../Header";
-//import { useRouter } from "next/navigation"; //"next/router"ではなくなった．
+//import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -26,7 +28,7 @@ type RegisterForm = {
     password: string;
 };
 
-// バリーデーションルール（yupを使ってルールを簡単に作成）
+// バリーデーションルール（yupを使ってルールを作成）
 const schema = yup.object({
     name: yup
     .string()
@@ -51,12 +53,12 @@ const Register = () => {
     const [registerSuccess, setRegisterSuccess] = useState(false);
 
     // react-hook-formライブラリから,{...register("email")}の形で各入力欄を命名し、
-    // ButtonタグにonClick={handleSubmit(onSubmit)}と書くだけで送信処理onSubmit:...を発火できる
+    // ButtonタグにonClick={handleSubmit(onSubmit)}と書くだけで送信処理onSubmit:...を発火できる.
     const {
       register,
       handleSubmit,
       reset,
-      formState: { errors }, // バリデーションエラーの際、エラーメッセージを表示させるために必要
+      formState: { errors }, // バリデーションエラーの際エラーメッセージを表示させるために必要.
     } = useForm<RegisterForm>({
       // yupのスキーマをReact Hook Formに適用．
       resolver: yupResolver(schema),
@@ -67,7 +69,7 @@ const Register = () => {
       },
     });
 
-    // フォーム送信時の処理（バリデーションOKな時に実行される）
+    // フォーム送信時の処理（バリデーションOKなら実行される）
     const onSubmit: SubmitHandler<RegisterForm> = async (data) => {
         const response = await fetch("https://my-portfolio-atomyah.vercel.app/api/user/register", { // /api/user/registerでは動作せず…
         method: "POST",
@@ -76,8 +78,8 @@ const Register = () => {
         },
         body: JSON.stringify(data),
         });
-        console.log('■', data) // Object email:"yyy@yyyy.com" name:"test" password:"...."
-        console.log('▲', JSON.stringify(data)) // {"name":"test", "email":"yyy@yyyy.com", "password":"..."}
+        // console.log('dataは、', data) // Object email:"yyy@yyyy.com" name:"test" password:"...."
+        // console.log('JSON.stringify(data)は、', JSON.stringify(data)) // {"name":"test", "email":"yyy@yyyy.com", "password":"..."}
         if (response.status === 200) {
             setRegisterSuccess(true);
             reset() // フォームのリセット
@@ -85,7 +87,7 @@ const Register = () => {
             alert("正常に登録できませんでした");
             reset() // フォームのリセット
         }
-        console.log(data);
+        // console.log(data);
     };
 
   return (
@@ -141,7 +143,7 @@ const Register = () => {
             </Stack>
             <Stack alignItems="center" mt={3}>
               <Button
-                disabled // ユーザーは私ひとりなのでユーザー登録ページは止めた.
+                disabled // ユーザーは私一人ゆえユーザー登録ページを無効化.
                 color="primary"
                 variant="contained"
                 size="large"

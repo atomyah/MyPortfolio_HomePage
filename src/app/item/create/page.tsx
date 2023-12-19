@@ -1,4 +1,5 @@
-/* src/app/item/crate/page.tsx アイテム登録ページ */
+/* src/app/item/crate/page.tsx 
+アイテム登録ページ */
 "use client";
 
 import React, { useState } from 'react'
@@ -15,7 +16,7 @@ import {
 import { MuiFileInput } from 'mui-file-input';
 import { SubmitHandler, useForm } from "react-hook-form";
 import Header from "../../Header";
-//import { useRouter } from "next/navigation"; //"next/router"ではなくなった．
+//import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -32,8 +33,6 @@ type CreateForm = {
   description: string,
   email?: string,
 };
-
-
 
 // バリーデーションルール（yupを使ってルールを簡単に作成）
 const schema = yup.object({
@@ -59,8 +58,8 @@ const CreatePage = () => {
   const router = useRouter();
   
 
-    // react-hook-formライブラリから,{...register("email")}の形で各入力欄を命名し、
-    // ButtonタグにonClick={handleSubmit(onSubmit)}と書くだけで送信処理onSubmit:...を発火できる
+  // react-hook-formライブラリから,{...register("email")}の形で各入力欄を命名し、
+  // ButtonタグにonClick={handleSubmit(onSubmit)}と書くだけで送信処理onSubmit:...を発火できる
   const {
     register,
     handleSubmit,
@@ -89,22 +88,34 @@ const CreatePage = () => {
     },
     body: JSON.stringify(data),
     });
-    console.log('■', data) // Object email:"yyy@yyyy.com" name:"test" password:"...."
-    console.log('▲', JSON.stringify(data)) // {"name":"test", "email":"yyy@yyyy.com", "password":"..."}
+
+    //console.log('■dataは、', data); 表示結果→ Object email:"yyy@yyyy.com" name:"test" password:"...."
+    //console.log('▲JSON.stringify(data)); 表示結果→ {"name":"test", "email":"yyy@yyyy.com", "password":"..."}
+    
     if (response.status === 200) {
         //setCreateSuccess(true);
         //reset() // フォームのリセット
-        router.push("https://my-portfolio-atomyah.vercel.app/item/create/created") // 「追加完了！」メッセージページ
+        router.push("https://my-portfolio-atomyah.vercel.app/item/create/created") // 「追加完了！」メッセージページへリダイレクト.
     } else {
         alert("正常に追加できませんでした");
         reset() // フォームのリセット
     }
   };
 
+  ////////////////////////////////////////////////////////////////////////////////////
+  //// 認証チェック. JWTデコードemailがあれば追加ページを表示.///
+  ////////////////////////////////////////////////////////////////////////////////////
+
   // utils/useAuth.tsのJWT.verifyからユーザーemailを取得する.
   const loginUser = useAuth();
-  //console.log('●loginUserは', loginUser) // ●loginUserは atom@...bz と表示.
 
+  //console.log('●loginUserは', loginUser); 表示結果→ ●loginUserは atom@...bz..
+
+  ////////////////////////////////////////////////////////////////////////////////////
+  //// 認証チェック. ここまで.///
+  ////////////////////////////////////////////////////////////////////////////////////
+
+  
   if(loginUser){
     return (
       <>

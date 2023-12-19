@@ -1,3 +1,4 @@
+/* src/app/item/[id]/page.module.css */
 /* 個別アイテムページのCSS */
 
 /* <Header />を包むコンテナ */
@@ -17,14 +18,3 @@
     border-radius: 5px 5px 0 0;
   }
 
-/* .modalCSS {
-        max-width: '80%';
-        max-height: '80%';
-        margin: 'auto';
-        display: 'flex';
-        flex-direction: 'column';
-        z-index: 10;
-}
-.overlayCSS {
-    backgroundColor: 'rgba(0, 0, 0, 0.75)';
-} */

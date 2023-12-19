@@ -1,3 +1,6 @@
+// src/pages/api/sendMail.ts
+// お問い合わせページ用sendMail API
+
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {  

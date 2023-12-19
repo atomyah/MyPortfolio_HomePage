@@ -1,22 +1,25 @@
-import React from 'react';
-import { Modal, Box, Button, } from '@mui/material';
-import Image from "next/image";
+// src/app/components/ImageModal.tsx
+// react-modalを使用することになったのでボツ.
 
-interface ImageModalProps {
-  isOpen: boolean;
-  imageUrl: string;
-  onClose: () => void;
-}
+// import React from 'react';
+// import { Modal, Box, Button, } from '@mui/material';
+// import Image from "next/image";
 
-const ImageModal: React.FC<ImageModalProps> = ({ isOpen, imageUrl, onClose }) => {
-  return (
-    <Modal open={isOpen} onClose={onClose}>
-      <Box>
-        <img src={imageUrl} alt="" width={1100} height={750} />
-        <Button onClick={onClose}>Close</Button>
-      </Box>
-    </Modal>
-  );
-};
+// interface ImageModalProps {
+//   isOpen: boolean;
+//   imageUrl: string;
+//   onClose: () => void;
+// }
 
-export default ImageModal;
+// const ImageModal: React.FC<ImageModalProps> = ({ isOpen, imageUrl, onClose }) => {
+//   return (
+//     <Modal open={isOpen} onClose={onClose}>
+//       <Box>
+//         <img src={imageUrl} alt="" width={1100} height={750} />
+//         <Button onClick={onClose}>Close</Button>
+//       </Box>
+//     </Modal>
+//   );
+// };
+
+// export default ImageModal;

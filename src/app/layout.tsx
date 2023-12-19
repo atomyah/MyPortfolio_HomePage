@@ -4,7 +4,6 @@ import Footer from "./Footer";
 import "./globals.css";
 import styles from "./layout.module.css";
 import Loading from "./loading";
-import Script from 'next/script'
 import { Noto_Sans_JP } from "next/font/google";
 //          ↑
 // Next/FontのLayout.tsxへ割り当て参考：https://zenn.dev/tsuyoshi/articles/894592ac677148

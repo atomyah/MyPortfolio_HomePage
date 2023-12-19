@@ -1,3 +1,6 @@
+// src/app/Header.tsx
+// 主にトップナブメニューを表示するためのもの
+
 import React from "react";
 import styles from "./Header.module.css";
 import Link from "next/link";

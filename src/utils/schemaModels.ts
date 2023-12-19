@@ -1,10 +1,5 @@
-{/* ログインするのは自分だけなのでmiddlewareでBasic認証で済ました．
-register.tsもlogin.tsも（およびそれらを発火するフロントエンドのページも必要なくなった。
-従って、UserDataType, UseSchema, UserModel = mongoose.models.Userも必要ない．
-まだ追加すべきことはJWTの仕組みをmiddleware.tsに取り入れることができるかどうか。*/}
-
-
-//utils/schemaModels.ts
+// src/utils/schemaModels.ts
+// MongoDBのスキーマ定義
 
 import mongoose from "mongoose";
 

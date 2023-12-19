@@ -1,4 +1,5 @@
-// src/app/item/delete/[id]/page.tsx 個別アイテム削除ページ
+// src/app/item/delete/[id]/page.tsx 
+// 個別アイテム削除ページ
 
 
 import React, { useState, useEffect }  from 'react'
@@ -15,18 +16,21 @@ import styles from "./page.module.css";
 import AdminHeader from '@/app/components/AdminHeader';
 import DeleteForm from './DeleteForm';
 
-
+// {params}でクリックしたアイテムid（を含むオブジェクト）にアクセスできる．
 const DeleteSingleItem = async ( { params }: { params: { id: string } } ) => {
-    // {params}でクリックしたアイテムid（を含むオブジェクト）にアクセスできる．なぜか不明．
-    // コンソールで確認すると↓、"△ { id: '656809a035cb1609ceb947e1' }" と表示される．
-    console.log('△', params) 
+    
+    // console.log('△paramsは、', params) 
+    // 表示結果
+    //   ↓
+    // "△paramsは、 { id: '656809a035cb1609ceb947e1' }"
 
     const res = await fetch(`https://my-portfolio-atomyah.vercel.app/api/item/${params.id}`, { cache: "no-store" });
     const singleItem = await res.json();
     
-    console.log('▽', singleItem)
-    // ↓ のように表示される．
-    // ▽ {
+    // console.log('▽singleItemは、', singleItem)
+    // 表示結果
+    //   ↓ 
+    // ▽singleItemは、 {
     //     message: 'アイテム１件読み取り成功',
     //     singleItem: {
     //       _id: '656806a735cb1609ceb947db',

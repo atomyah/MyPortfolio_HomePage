@@ -1,3 +1,4 @@
+// src/app/contact/page.tsx
 // contactページ
 "use client"; //useForm使うなら必要．
 

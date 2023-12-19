@@ -1,3 +1,6 @@
+// src/app/components/AdminHeader.tsx
+// 追加・編集・削除ページにのみ表示する上部ナビゲーションメニュー
+
 import React from "react";
 import styles from "./AdminHeader.module.css";
 import Link from "next/link";

@@ -1,3 +1,4 @@
+// src/app/user/login/page.tsx
 /* ユーザーログインページ */
 "use client";
 
@@ -13,14 +14,14 @@ import {
   } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Header from "../../Header";
-//import { useRouter } from "next/navigation"; //"next/router"ではなくなった．
+//import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import AdminHeader from '@/app/components/AdminHeader';
 
 // フォームの型
-type ContactForm = {
+type ContactFormType = {
     email: string;
     password: string;
 };
@@ -52,7 +53,7 @@ const Login = () => {
       handleSubmit,
       reset,
       formState: { errors }, // バリデーションエラーの際、エラーメッセージを表示させるために必要
-    } = useForm<ContactForm>({
+    } = useForm<ContactFormType>({
       // yupのスキーマをReact Hook Formに適用．
       resolver: yupResolver(schema),
       defaultValues: {
@@ -62,7 +63,7 @@ const Login = () => {
     });
 
     // フォーム送信時の処理（バリデーションOKな時に実行される）
-    const onSubmit: SubmitHandler<ContactForm> = async (data) => {
+    const onSubmit: SubmitHandler<ContactFormType> = async (data) => {
         const response = await fetch("https://my-portfolio-atomyah.vercel.app/api/user/login", {
         method: "POST",
         headers: {
@@ -70,12 +71,17 @@ const Login = () => {
         },
         body: JSON.stringify(data),
         });
-        //console.log('■', data) // Object email:"yyy@yyyy.com" name:"test" password:"...."
-        //console.log('▲', JSON.stringify(data)) // {"name":"test", "email":"yyy@yyyy.com", "password":"..."}
-        if (response.status === 200) {
-            const jsonData = await response.json(); // api/user/login.tsの57行目より来ている↓
-            // console.log('●', jsonData.token)        // return res.status(200).json({token: token})
-            localStorage.setItem("token", jsonData.token) // tokenをローカルストレージに保管.（ステート変数はページリロードで消えてしまう）
+          //console.log('dataは、', data); 表示結果→ Object email:"yyy@yyyy.com" name:"test" password:"...."
+          //console.log('JSON.stringify(data)は、', JSON.stringify(data)); 表示結果→ {"name":"test", "email":"yyy@yyyy.com", "password":"..."}
+        
+         if (response.status === 200) {
+            const jsonData = await response.json(); 
+              // console.log('jsonData.tokenは、', jsonData.token)
+              // jsonDataはapi/user/login.tsの58～70行目より取得↓ 
+              // `return res.status(200).json({token: token}) `
+
+            // tokenをローカルストレージに保管（state変数はページリロードで消えてしまう）.
+            localStorage.setItem("token", jsonData.token)  
 
             setRegisterSuccess(true);
             reset() // フォームのリセット
@@ -83,7 +89,7 @@ const Login = () => {
             alert("正常にログインできませんでした");
             reset() // フォームのリセット
         }
-        //console.log(data); // {email: 'atom@example..', password: 'aaaa1111'}
+        //console.log(data); 表示結果→ {email: 'atom@example..', password: 'aaaa1111'}
     };
 
   return (

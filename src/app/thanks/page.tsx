@@ -1,7 +1,10 @@
+// src/app/thanks/page.tsx
+// お問い合わせページより送信後に表示する「送信完了」ページ
+
 import React from "react";
 import Header from "../Header";
 import styles from "./page.module.css";
-import { Box, Container, Grid, Stack, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 
 const thanks = () => {
   return (

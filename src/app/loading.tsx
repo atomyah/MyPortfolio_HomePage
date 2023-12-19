@@ -1,3 +1,6 @@
+// src/app/loading.tsx
+// ローディングコンポーネント
+
 import React from 'react'
 import styles from './loading.module.css';
 

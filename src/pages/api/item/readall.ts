@@ -1,4 +1,6 @@
 // pages/api/item/readall.ts
+// トップページに全件読み込むためのreadall API
+
 import { NextApiRequest, NextApiResponse } from "next";
 import { NextResponse } from "next/server";
 import connectDB from "@/utils/database";

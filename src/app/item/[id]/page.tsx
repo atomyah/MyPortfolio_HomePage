@@ -1,4 +1,5 @@
-// src/app/item/[id].tsx 個別アイテム表示ページ
+// src/app/item/[id].tsx 
+// 個別アイテム表示ページ
 
 import React from 'react'
 import Image from "next/image";
@@ -6,7 +7,6 @@ import styles from "./page.module.css";
 import Link from "next/link";
 import Header from "../../Header";
 import Head from "next/head";
-import Script from 'next/script'
 import {
   Container,
   Grid,
@@ -16,18 +16,17 @@ import {
 } from "@mui/material";
 import SinglePageView from './SinglePageView';
 
-
+// {params}でクリックしたアイテムid（を含むオブジェクト）にアクセスできる．
 const ReadSingleItem = async ( { params }: { params: { id: string } } ) => {
-    // {params}でクリックしたアイテムid（を含むオブジェクト）にアクセスできる．なぜか不明．
-    // コンソールで確認すると↓、"△ { id: '656809a035cb1609ceb947e1' }" と表示される．
-    console.log('△', params) 
+
+    // console.log('paramsは、', params); 表示結果→ "paramsは、 { id: '656809a035cb1609ceb947e1' }"
 
     const res = await fetch(`https://my-portfolio-atomyah.vercel.app/api/item/${params.id}`, { cache: "no-store" });
     const singleItem = await res.json();
 
-    // console.log('▽', singleItem)
-    // ↓ のように表示される．
-    // ▽ {
+    // console.log('singleItemは、', singleItem)
+    // 表示結果 ↓ 
+    // singleItemは、 {
     //     message: 'アイテム１件読み取り成功',
     //     singleItem: {
     //       _id: '656806a735cb1609ceb947db',
@@ -39,10 +38,6 @@ const ReadSingleItem = async ( { params }: { params: { id: string } } ) => {
     //     }
     //   }
 
-    const handleImageClick = () => {
-      // 画像がクリックされたときに新しいウィンドウを開く
-      window.open(singleItem.singleItem.image, '_blank');
-    };
 
   return (
         <>

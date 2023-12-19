@@ -1,25 +1,19 @@
-"use client"; //useState, useEffect使うなら必要．
+"use client";
 
 import Image from "next/image";
 import topImage from "../../public/topImage.png";
 import styles from "./page.module.css";
 import Link from "next/link";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./Header";
 import {
   Grid,
   Box,
   Typography,
-  List,
-  ListItem,
-  ListItemText,
 } from "@mui/material";
 import { ItemModel, ItemDataType } from "@/utils/schemaModels";
 import { Types } from 'mongoose'
-import { NextApiRequest, NextApiResponse } from "next";
-import { NextResponse } from "next/server";
-import booksJsonData from '../data/books.json'; // kindle本データ
-
+import booksJsonData from '../data/books.json'; // 執筆物のJSONデータ
 
 //// Next/font/googleフォントの設定 ////
 // 参考：font.ts
@@ -41,61 +35,28 @@ interface booksJsonDataType {
   bookURL: string,
 }
 
-
 const Home = () => {
   const [allItems, setAllItems] = useState<ExtendedSavedItemDataType[]>([])
 
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch(`https://my-portfolio-atomyah.vercel.app/api/item/readall`, { cache: "no-store" });
+      // ↑ /api/item/readall.tsの21～25行目から取得.
+
       const Items = await res.json();
-      // console.log('□', Items) // {message: 'アイテム全件読み取り成功', allItems: Array(6)} →allItems →0:{_id:'656806a7..},→1:{_id:'6568と表示．
-                             // /api/item/readall.tsの21行目から来ている↑
-      setAllItems(Items.allItems) // setAllItems(Items)だとmapで’allItems.map is not a function’エラー．
-                                  // Itemsはオブジェクトなのでその配下のallItems配列をセットしなければならない．
+
+      // console.log('Itemsは、', Items) 
+      // ↑表示結果：{message: 'アイテム全件読み取り成功', allItems: Array(6)} →allItems →0:{_id:'656806a7..},→1:{_id:'6568…．
+      
+      setAllItems(Items.allItems) 
+      // setAllItems(Items)だとmapで’allItems.map is not a function’エラー．
+      // Itemsはオブジェクト.その配下のallItems配列をセットする．
     };
-
     fetchData();
-
   }, []);
 
-    //console.log('allItemsは、', allItems); // 41行目と同じ結果．
-      //      ↓
-      // allItemsは、 
-      // [
-      //   {
-      //       "_id": "656806a735cb1609ceb947db",
-      //       "title": "Next.jsでこのサイト",
-      //       "image": "http://res.cloudinary.com/atomyah/image/upload/v170227077・・・
-      //       "description": "JSフレームワークNext.js14、データベースはMongoDB、画像ファイル・・・
-      //       "email": "atom@yah.bz",
-      //       "__v": 0
-      //   },
-      //   {
-      //       "_id": "6568079035cb1609ceb947dd",
-      //       "title": "AWSでLINEボット開発",
-      // …以下略…
-      // と表示.
-
+    //console.log('allItemsは、', allItems); // 45行目と同じ結果．
     //console.log('booksJsonDataは、', booksJsonData);
-      //      ↓
-      // booksJsonDataは、 [
-      //   {
-      //     id: 1,
-      //     bookImage: '/kindle01.jpg',
-      //     bookTitle: 'Learning MVC architecture with PHP',
-      //     bookSubTitle: '～ to exit beginners, before entering frameworks',
-      //     bookURL: ''
-      //   },
-      //   {
-      //     id: 2,
-      //     bookImage: '/kindle02.jpg',
-      //     bookTitle: 'Azure Active DirectoryとOffice 365でクラウドネイティブな企業インフラ構築術',
-      //     bookSubTitle: '　　',
-      //     bookURL: ''
-      //   },
-      //   と表示.
-
 
   return (
     <div className={styles.container}>
@@ -110,7 +71,6 @@ const Home = () => {
       </figure>
 
       {/* 画像の上のタイトル */}
-
       <h1 className={styles.title}>
         Atom Yahポートフォリオ
       </h1>
@@ -121,6 +81,7 @@ const Home = () => {
       </div>
       {/* トップ画像ここまで */}
 
+
       {/* ページタイトル１ */}
       <h2>
         <Typography align="center" fontSize={20} fontWeight={400} mt={3} mb={3}>
@@ -128,7 +89,6 @@ const Home = () => {
         </Typography>
       </h2>
       
-
       {/* アイテム（実績）を並べるギャラリー */}
       <section className={styles.gallery}>
         {/* カード */}
@@ -215,7 +175,7 @@ const Home = () => {
         <Box sx={{ marginTop: '20px', marginLeft: '50px' }}>
           <ul>
             <li>＜古いものから＞</li>
-            <li>・外資系SIer会社にてマネージャー3年</li>
+            <li>・外資系SIer会社にて派遣社員→正社員マネージャー3年</li>
             <li>・マイクロソフト㈱にてシステムズエンジニア5年</li>
             <li>・大手銀行にて金融インフラグループ部長代理2年</li>
             <li>・外資系フットウェアブランド社内情報システム部門にてインフラストラクチャーリード9年</li>
@@ -227,3 +187,43 @@ const Home = () => {
   );
 }
 export default Home
+
+
+
+//////////////////////////////////////// 参考(備忘録) ///////////////////////////////////////////
+
+      ///// 58行目console.log('allItemsは、', allItems);の表示結果 /////
+      //      ↓
+      // allItemsは、 
+      // [
+      //   {
+      //       "_id": "656806a735cb1609ceb947db",
+      //       "title": "Next.jsでこのサイト",
+      //       "image": "http://res.cloudinary.com/atomyah/image/upload/v170227077・・・
+      //       "description": "JSフレームワークNext.js14、データベースはMongoDB、画像ファイル・・・
+      //       "email": "atom@yah.bz",
+      //       "__v": 0
+      //   },
+      //   {
+      //       "_id": "6568079035cb1609ceb947dd",
+      //       "title": "AWSでLINEボット開発",
+      // …以下略…
+
+
+      ////// 59行目console.log('booksJsonDataは、', booksJsonData);の表示結果 /////
+      //      ↓
+      // booksJsonDataは、 [
+      //   {
+      //     id: 1,
+      //     bookImage: '/kindle01.jpg',
+      //     bookTitle: 'Learning MVC architecture with PHP',
+      //     bookSubTitle: '～ to exit beginners, before entering frameworks',
+      //     bookURL: ''
+      //   },
+      //   {
+      //     id: 2,
+      //     bookImage: '/kindle02.jpg',
+      //     bookTitle: 'Azure Active DirectoryとOffice 365でクラウドネイティブな企業インフラ構築術',
+      //     bookSubTitle: '　　',
+      //     bookURL: ''
+      //   },

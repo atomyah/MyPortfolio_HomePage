@@ -1,3 +1,6 @@
+/* src/app/loading.module.css
+ローディングコンポーネントのCSS */
+
 .loaderContainer {
   display: flex;
   align-items: center;

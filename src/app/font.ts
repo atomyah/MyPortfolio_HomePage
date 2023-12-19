@@ -1,6 +1,6 @@
 // next/font/googleの使用
-// 参考：https://zenn.dev/siino/articles/b42d658af571f0
-// https://github.com/snd-primary/nextfonts/tree/main/app
+// 参考１：https://zenn.dev/siino/articles/b42d658af571f0
+// 参考２：https://github.com/snd-primary/nextfonts/tree/main/app
 
 import { M_PLUS_Rounded_1c, Zen_Kaku_Gothic_Antique, Source_Code_Pro } from 'next/font/google'
 

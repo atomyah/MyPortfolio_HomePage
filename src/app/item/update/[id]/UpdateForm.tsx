@@ -1,4 +1,6 @@
-// src/app/item/update/updateForm.tsx 個別アイテム編集ページに埋め込むフォームコンポーネント
+// src/app/item/update/updateForm.tsx 
+// 個別アイテム編集ページに埋め込むフォームコンポーネント.
+
 "use client";
 
 import React, { useState, useEffect } from 'react'
@@ -13,7 +15,7 @@ import {
   } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Header from "../../../Header";
-//import { useRouter } from "next/navigation"; //"next/router"ではなくなった．
+//import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -89,7 +91,7 @@ const UpdateForm = ({ singleItem }: UpdateFormProps) => {
     });
 
 
-      // フォーム送信時の処理（バリデーションOKな時に実行される）
+    // フォーム送信時の処理（バリデーションOKな時に実行される）
     const onSubmit: SubmitHandler<UpdateForm> = async (data) => {
         const response = await fetch(`https://my-portfolio-atomyah.vercel.app/api/item/update/${singleItem.singleItem._id}`, {
         method: "POST",
@@ -101,33 +103,43 @@ const UpdateForm = ({ singleItem }: UpdateFormProps) => {
         },
         body: JSON.stringify(data),
         });
-        console.log('■', data) // Object email:"yyy@yyyy.com" name:"test" password:"...."
-        console.log('▲', JSON.stringify(data)) // {"name":"test", "email":"yyy@yyyy.com", "password":"..."}
+
+        // console.log('dataは、', data) // Object email:"yyy@yyyy.com" name:"test" password:"...."
+        // console.log('JSON.stringify(data)は、', JSON.stringify(data)) // {"name":"test", "email":"yyy@yyyy.com", "password":"..."}
+        
         if (response.status === 200) {
             // setUpdateSuccess(true);
-            router.push("https://my-portfolio-atomyah.vercel.app/item/update/updated") // 「編集完了！」メッセージページ
+            router.push("https://my-portfolio-atomyah.vercel.app/item/update/updated") // 「編集完了！」メッセージページへリダイレクト.
         } else {
             alert("正常に編集できませんでした");
             reset() // フォームのリセット
         }
     };
 
-    //// 認証チェック. JWTデコードemailとログインユーザーemailが同じなら削除ページを表示.////
-    //// useEffect()で非同期処理をしないと、}else{<h1>権限がありません</h1>}が一瞬表示されてしまう.////
+    ////////////////////////////////////////////////////////////////////////////////////
+    //// 認証チェック. JWTデコードemailとログインユーザーemailが同じなら編集ページを表示.///
+    ////////////////////////////////////////////////////////////////////////////////////
+
     // utils/useAuth.tsのJWT.verifyからユーザーemailを取得する.
     const loginUser = useAuth();
-    console.log('●loginUserは', loginUser) // ●loginUserは atom@...bz と表示.
 
+    // console.log('●loginUserは', loginUser) // ●loginUserは atom@...bz と表示.
+
+    //// useEffect()で非同期処理をしないとreturn以下のHTMLが一瞬表示されてしまう.////
     useEffect(() => {
-        // ユーザーの認証が完了したら権限を設定
+
+        // ユーザーの認証が完了したら権限を設定（isAuthorizedをtrueに）.
         setIsAuthorized(loginUser === singleItem?.singleItem.email);
+
     }, [loginUser, singleItem]);
 
     if (isAuthorized === null) {
-        // 認証が完了していない場合はローディングまたは何も表示しない
+        // 認証が完了していない場合は何も表示しない
         return null;
     }    
-    //// 認証チェック. ここまで.////
+    ////////////////////////////////////////////////////////////////////////////////////
+    //// 認証チェック. ここまで.///
+    ////////////////////////////////////////////////////////////////////////////////////
 
 
     if(isAuthorized){

@@ -1,6 +1,5 @@
-{/* ！このmiddleware.tsはルートに配置しなければならない（src配下だと動作しなかった）
-    ！このmiddlewareを対象のapi処理の前に挟むには、対象api（例：api/create.ts）でインポートし
-    ！export default middleware(createItem)、とmiddlewareで囲ってあげる必要がある．*/}
+// middleware.ts
+// src配下に置くと動作しなかった.
 
 import { NextApiRequest, NextApiResponse } from "next";
 import { NextRequest, NextResponse } from 'next/server'
@@ -26,7 +25,7 @@ const middleware = (handler: Function) => {
 
     const token = await (req.headers.authorization ?? '').split(" ")[1]
     // req.headers.authorizationの中身は「Bearer eyJhbGciOiJI....」となるため半角スペースでsplitした後半を取り出している．
-    // pages/api/create/page.tsx70行目参考
+    // pages/api/create/page.tsx、70行目参考
     
     // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF0b21AeWFoLmJ6IiwiaWF0IjoxNzAxMzE1ODkyLCJleHAiOjE3MDEzOTg2OTJ9.a46czI1AT5Tffr2SsytjmaAu7EWwaAKB4qXuKiHQk94"
 
@@ -36,10 +35,14 @@ const middleware = (handler: Function) => {
 
     try{
       const decoded = jwt.verify(token, secret_key)
-        // console.log('▲', token) // eyJhbGciOiJIUzI1NiIsInR....が表示
-        // console.log('■ デコードされたtoken:', decoded) //  {email: 'atom@example..', iat: 1701152943, exp: 1701235743}と表示
-        req.body.email = (decoded as DecodedType).email // req.body.emailにdecoded.emalが格納されupdate/[id].ts等にreqとして渡される
+        // console.log('▲tokenは、', token); 表示結果→ ▲tokenは、eyJhbGciOiJIUzI1NiIsInR....
+        // console.log('■ デコードされたtokenは、', decoded); 表示結果→ ■ デコードされたtokenは、{email: 'atom@example..', iat: 1701152943, exp: 1701235743}と表示
+        
+        // req.body.emailにdecoded.emalが格納されupdate/[id].ts等にreqとして渡される
+        req.body.email = (decoded as DecodedType).email
+
         return handler(req,res)
+
       }catch(err){
         console.error('Token verification failed:', err);
         return res.status(400).json({message:'トークンが正しくないのでログインしてください'})
@@ -48,6 +51,24 @@ const middleware = (handler: Function) => {
 }
 
 export default middleware
+
+
+export const config = {
+  matcher: [  // matcherとはmiddlewareによる認証チェックを行うページ／API
+    //pageのURL//
+    // "/item/create",
+    //apiのURL//
+    "/api/item/create",
+    "/api/item/update/:path*",
+    "/api/item/delete/:path*",
+  ],
+}
+
+
+
+
+
+//////////////////////////////////////// 参考(備忘録) ///////////////////////////////////////////
 
 ////////////////// Basic認証 //////////////////
 // export const middleware = (req: NextRequest) => {
@@ -77,13 +98,3 @@ export default middleware
 // }
 ////////////////// Basic認証ここまで //////////////////
 
-export const config = {
-  matcher: [  // matcherとはmiddlewareによる認証チェックを行うページ／API
-    //pageのURL//
-    // "/item/create",
-    //apiのURL//
-    "/api/item/create",
-    "/api/item/update/:path*",
-    "/api/item/delete/:path*",
-  ],
-}

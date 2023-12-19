@@ -1,6 +1,6 @@
-//app/item/update/created/page.tsx 追加完了！ページ
-// 追加(item/create/page.tsx_で追加成功すると)
-// router.push("https://my-portfolio-atomyah.vercel.app/item/create/created") でこのページに飛ばす．
+// src/app/item/update/created/page.tsx 
+// 追加完了！ページ
+// 追加ページで追加成功するとrouter.pushでこのページに飛ばす．
 
 import React from "react";
 import Header from "../../../Header";

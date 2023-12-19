@@ -1,4 +1,5 @@
-// src/app/item/[id]/SinglePageView.tsx 個別アイテムページに埋め込むViewコンポーネント
+// src/app/item/[id]/SinglePageView.tsx 
+// 個別アイテムページに埋め込むViewコンポーネント
 "use client";
 
 import React, { useState, useEffect } from 'react'
@@ -47,16 +48,6 @@ const responsiveModalStyle: Styles = {
       flexDirection: 'column',
       alignItems: 'center'
     },
-    // '@media (maxWidth: 419px)': { // Stylesに'@media (maxWidth: 419px)'を割り当て不可能とエラー.
-    //   content: {
-    //     maxWidth: '95%', // Adjusted for smaller screens
-    //     maxHeight: '95vh', // Adjusted for smaller screens
-    //     margin: 'auto',
-    //     display: 'flex',
-    //     flexDirection: 'column',
-    //     position: 'relative',
-    //   },
-    // },
 };
 
 const SinglePageView = ({ singleItem }:SinglePageViewProps) => {
@@ -80,6 +71,7 @@ const SinglePageView = ({ singleItem }:SinglePageViewProps) => {
         };
     }, []);
 
+    
     const handleImageClick = () => {
         // 小さな画面の場合はモーダルを開かない
         if (windowWidth > 430) {
@@ -145,8 +137,7 @@ const SinglePageView = ({ singleItem }:SinglePageViewProps) => {
         
         <br />
         <Box p={1} sx={{color:'dark', fontSize:'16', textAlign: 'left'}}>
-            {/* description表示箇所はサニタイズ解除↓ 文章の最初の80字以内にHTMLタグ入れると
-            トップページのdescription表示箇所にはHTMLタグが見えてしまうから注意.*/}
+            {/* description表示箇所はサニタイズ解除*/}
             <div dangerouslySetInnerHTML={{ __html: singleItem.singleItem.description }} />
         </Box>
         <Box mb={6} mt={6} sx={{backgroundColor:'#eee', paddingLeft:'50px',paddingRight:'50px',paddingBottom:'30px',paddingTop:'10px'}}>
