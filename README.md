@@ -47,21 +47,21 @@ https://my-portfolio-atomyah.vercel.app/
 
 #### トップページ（実績一覧）
 
-![トップページ](image-4.png)
+![トップページ（実績一覧）](image-5.png)
 
 #### 詳細ページ
 
-![詳細ページ](image-2.png)
+![詳細ページ](image-6.png)
 
 <!-- プロジェクトについて -->
 
 #### 編集ページ
 
-![編集ページ](image-3.png)
+![編集ページ](image-7.png)
 
 ## プロジェクトについて
 
-１．Angular や Gatsby.js など JS フレームワークのメインストリームから外れた技術での案件ばかりやっていたため、自分のポートフォリオサイトを Next.js で制作することにしました。フロントエンドおよびバックエンドともに Next.js14 で構築した、いちおうフルスタックアプリとなっています。
+１．Angular や Gatsby.js などメインストリームから外れた技術でのフロントエンド案件ばかりやっていたため、自分のポートフォリオサイトを Next.js で制作することにしました。フロントエンドおよびバックエンドともに Next.js14 で構築した、いちおうフルスタックアプリとなっています。
 <br />
 <br />
 ２．トップページの「実績」一覧をカードで表示し、それぞれをクリックするとその「詳細」ページに飛ぶシンプルなものです。データは MongoDB に、画像ファイルは Cloudinary に格納させるようにしました。「実績」の追加・編集・削除各ページは、JWT トークンで管理し、認証チェックではじかれるとログイン画面にリダイレクトするよう バックエンド、フトントエンド双方でガードをかけました。
@@ -232,17 +232,17 @@ git clone https://github.com/atomyah/MyPortfolio_HomePage
 
 いくつかのファイルにおいて、バックエンドの API を fetch するコードで API パスがフルパスで書かれている.
 <br />
+例：
 
 <pre>
-例：
 await fetch(`https://my-portfolio-atomyah.vercel.app/api/item/readall`, { cache: "no-store" });
 </pre>
 
 <font color="red">エディタを使いそのパスの URL 箇所を次のようにローカルサーバーの URL に全置換する.</font>
 
-https://my-portfolio-atomyah.vercel.app
+https://my-portfolio-atomyah.vercel.app/
 を、
-https://my-portfolio-atomyah.vercel.app
+http://localhost:3000
 に全置換.
 
 <br />
@@ -258,16 +258,16 @@ https://my-portfolio-atomyah.vercel.app
 
 ※ ＜ MongoDB への接続詞＞にはユーザー名、パスワード、使用するデータベース名が含まれている.
 
-SendGrid、MongoDB、Cloudinary のダッシュボード より各 API キーおよび接続詞を取得後、.env.local ファイルをプロジェクトルートに作成し、上記環境変数を記述.
+SendGrid、MongoDB、Cloudinary のダッシュボード より各 API キーおよび接続詞を取得後、.env.local ファイルを作成し、上記環境変数を記述.
 
 ### 動作確認
 
-`npm run dev`コマンドで開発サーバーを立ち上げ
-https://my-portfolio-atomyah.vercel.app にアクセスし、画面表示されるか確認.
+`npm run dev`コマンドで開発サーバーを立ち上げ、
+http://localhost:3000 にアクセスできるか確認.
 
 ### 停止
 
-キーボード Ctrl ＋ C で停止開発サーバーを停止する.
+キーボード Ctrl ＋ C で停止開発サーバーを停止できる.
 
 <p align="right">(<a href="#top">トップへ</a>)</p>
 
@@ -275,7 +275,7 @@ https://my-portfolio-atomyah.vercel.app にアクセスし、画面表示され�
 
 以下のように、バックエンド、フロントエンドともに Next.js で作られている．
 
-![Alt text](image.png)
+![システム構成図](image.png)
 
 ## トラブルシューティング
 
@@ -311,25 +311,18 @@ styled-components や module CSS など色々試したが、どうしてもメ�
 
 #### The "images.domains" configuration is deprecated. Please use "images.remotePatterns" configuration instead.
 
-`<Image>`にはアプリケーションをユーザーの攻撃から守るため、next.config.js で画像読み込みを許可するドメインを指定する必要がある。これまでは下記のような domains 指定で許可指定を行っていた.
+`<Image>`にはアプリケーションをユーザーの攻撃から守るため、外部ドメインの画像読み込みを制限する機構が組み込まれており、画像を読み込むためには next.config.js で画像読み込みを許可するドメインを指定する必要があります。今までは、
 
 ```js
-//next.config.js
-const nextConfig = {
-	images: {
-		// Cloudinaryを使うための設定↓
-		domains: ["res.cloudinary.com"],
-	},
-};
-module.exports = nextConfig;
+images: {
+   // Cloudinaryを使うための設定↓
+  domains: ["res.cloudinary.com"],
+},
 ```
 
-解決方法：
-Nex.js14 からは domains での指定は非推奨となり、remotePatterns の使用が推奨されるようになった模様。以下のように変更.
+Next.js 14 から domains の使用は一部の状況を除いて非推奨となり、代わりに remotePatterns の使用が推奨されるようになったようです。
 
 ```js
-//next.config.js
-const nextConfig = {
 	images: {
 		// Cloudinaryを使うための設定↓
 		remotePatterns: [
@@ -341,10 +334,6 @@ const nextConfig = {
 			},
 		],
 	},
-};
-module.exports = nextConfig;
 ```
-
-これで上記エラーは出なくなった.
 
 <p align="right">(<a href="#top">トップへ</a>)</p>
