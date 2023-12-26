@@ -38,7 +38,9 @@ const Home = () => {
 		const fetchData = async () => {
 			const res = await fetch(
 				`https://my-portfolio-atomyah.vercel.app/api/item/readall`,
-				{ next: { revalidate: 60 } }
+				{
+					next: { revalidate: 60 },
+				}
 			);
 			// ↑ /api/item/readall.tsの21～25行目から取得.
 
@@ -92,14 +94,15 @@ const Home = () => {
 					{allItems.map((item) => (
 						<Grid item lg={3} md={4} sm={6} key={item._id.toString()}>
 							<Box sx={{ padding: "2px", margin: "2px" }}>
-								{/* カードの画像は1100px,750pxと決め打ち */}
+								{/* カードの画像は1100px,750px. 一覧では400x270に縮小して表示. */}
+								{/* 詳細ページおよびそのモーダルは1100x750で表示 */}
 								<Link href={`item/${item._id}`}>
 									<Image
 										className={styles.cardImg}
 										src={item.image}
 										alt=""
-										width={1100}
-										height={750}
+										width={400}
+										height={270}
 									/>
 								</Link>
 							</Box>
