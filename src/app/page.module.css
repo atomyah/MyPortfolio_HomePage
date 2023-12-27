@@ -27,7 +27,7 @@
 参考：https://yoncoichi.com/text-on-the-image/ */
 .title {
   position: absolute;
-  top:10%;
+  top:8%;
   left:50%;
   transform: translate(-50%,-50%);
   font-size: 1.4em;
@@ -149,7 +149,7 @@ xl – 特大: 1536px ～ */
 @media (max-width: 900px) {
   .title {
     position: absolute;
-    top:6%;
+    top:5%;
     left:50%;
     transform: translate(-50%,-110%);
     font-size: 1.3em;
@@ -164,7 +164,7 @@ xl – 特大: 1536px ～ */
     position: absolute;
     top:4%;
     left:50%;
-    transform: translate(-50%,-110%);
+    transform: translate(-50%,-170%);
     font-size: 1.3em;
     font-weight: 600;
     color: rgb(1, 69, 60)
@@ -175,7 +175,7 @@ xl – 特大: 1536px ～ */
 @media (max-width: 440px) {
   .title {
     position: absolute;
-    top:5%;
+    top:4%;
     left:50%;
     transform: translate(-50%,-150%);
     font-size: 1.0em;

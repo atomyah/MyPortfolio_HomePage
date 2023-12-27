@@ -9,6 +9,7 @@ import Header from "./Header";
 import { Grid, Box, Typography } from "@mui/material";
 import { ItemModel, ItemDataType } from "@/utils/schemaModels";
 import { Types } from "mongoose";
+import Loading from "./loading"; // ローディングコンポーネントのインポート
 import booksJsonData from "../data/books.json"; // 執筆物のJSONデータ
 
 //// Next/font/googleフォントの設定 ////
@@ -33,9 +34,12 @@ interface booksJsonDataType {
 
 const Home = () => {
 	const [allItems, setAllItems] = useState<ExtendedSavedItemDataType[]>([]);
+	const [loading, setLoading] = useState(true); // ローディング状態を管理
 
 	useEffect(() => {
 		const fetchData = async () => {
+			setLoading(true); // データ取得開始時にローディング状態をtrueに設定
+			try {
 			const res = await fetch(
 				`https://my-portfolio-atomyah.vercel.app/api/item/readall`,
 				{
@@ -52,6 +56,11 @@ const Home = () => {
 			setAllItems(Items.allItems);
 			// setAllItems(Items)だとmapで’allItems.map is not a function’エラー．
 			// Itemsはオブジェクト.その配下のallItems配列をセットする．
+			}catch {
+				console.error("データの取得中にエラーが発生しました", Error);
+			} finally {
+				setLoading(false); // データ取得終了時にローディング状態をfalseに設定
+			}
 		};
 		fetchData();
 	}, []);
@@ -61,6 +70,10 @@ const Home = () => {
 
 	return (
 		<div className={styles.container}>
+		 {loading ? (
+			<Loading />
+		  ) : (
+		  <div className={styles.container}>
 			{/* トップ画像（白紙） */}
 			<figure className={styles.figure}>
 				<Image src={topImage} alt="" width={1280} height={200} />
@@ -92,7 +105,7 @@ const Home = () => {
 					spacing={2}
 				>
 					{allItems.map((item) => (
-						<Grid item lg={3} md={4} sm={6} key={item._id.toString()}>
+						<Grid item lg={3} md={4} sm={6} mb={3} key={item._id.toString()}>
 							<Box sx={{ padding: "2px", margin: "2px" }}>
 								{/* カードの画像は1100px,750px. 一覧では400x270に縮小して表示. */}
 								{/* 詳細ページおよびそのモーダルは1100x750で表示 */}
@@ -134,6 +147,54 @@ const Home = () => {
 			</section>
 
 			{/* ページタイトル２ */}
+			{/* '../data/books.json'に記述したKindle執筆本データをbooksJsonDataとして読み込みmapで表示. */}
+			<h2>
+				<Typography align="center" fontSize={20} fontWeight={400} mt={7} mb={3}>
+					執筆物
+				</Typography>
+			</h2>
+
+			{/* booksJsonData（執筆物）を並べるギャラリー */}
+			<section className={styles.booksGallery}>
+				<Grid container justifyContent="flex-start" spacing={1}>
+					{booksJsonData.map((book: booksJsonDataType) => (
+						<Grid
+							item
+							lg={2}
+							md={2}
+							sm={3}
+							xs={4}
+							className={styles.booksGrid}
+							key={book.id.toString()}
+						>
+							<Box sx={{ padding: "2px", margin: "2px" }}>
+								{/* カードの画像は500px,700pxと決め打ち */}
+								<Link
+									href={book.bookURL}
+									rel="noopener noreferrer"
+									target="_blank"
+								>
+									<Image
+										className={styles.cardImg}
+										src={book.bookImage}
+										alt=""
+										width={500}
+										height={700}
+									/>
+								</Link>
+							</Box>
+							<Box sx={{ padding: "1px", margin: "1px" }}>
+								<Typography align="left" fontSize={14} fontWeight={400}>
+									{book.bookTitle}
+								</Typography>
+								<Typography align="left" fontSize={13} color="#577">
+									{book.bookSubTitle}
+								</Typography>
+							</Box>
+						</Grid>
+					))}
+				</Grid>
+			</section>
 
 			{/* ページタイトル３ */}
 			<h2>
@@ -163,9 +224,11 @@ const Home = () => {
 					</ul>
 				</Box>
 			</Grid>
+		 </div>
+		)}
 		</div>
-	);
-};
+	)
+}
 export default Home;
 
 //////////////////////////////////////// 参考(備忘録) ///////////////////////////////////////////
