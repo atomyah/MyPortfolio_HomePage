@@ -242,7 +242,7 @@ await fetch(`https://my-portfolio-atomyah.vercel.app/api/item/readall`, { cache:
 
 https://my-portfolio-atomyah.vercel.app/
 を、
-http://localhost:3000
+https://my-portfolio-atomyah.vercel.app
 に全置換.
 
 <br />
@@ -263,7 +263,7 @@ SendGrid、MongoDB、Cloudinary のダッシュボード より各 API キーお
 ### 動作確認
 
 `npm run dev`コマンドで開発サーバーを立ち上げ、
-http://localhost:3000 にアクセスできるか確認.
+https://my-portfolio-atomyah.vercel.app にアクセスできるか確認.
 
 ### 停止
 

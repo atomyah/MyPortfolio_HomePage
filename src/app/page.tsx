@@ -134,54 +134,6 @@ const Home = () => {
 			</section>
 
 			{/* ページタイトル２ */}
-			{/* '../data/books.json'に記述したKindle執筆本データをbooksJsonDataとして読み込みmapで表示. */}
-			<h2>
-				<Typography align="center" fontSize={20} fontWeight={400} mt={7} mb={3}>
-					執筆物
-				</Typography>
-			</h2>
-
-			{/* booksJsonData（執筆物）を並べるギャラリー */}
-			<section className={styles.booksGallery}>
-				<Grid container justifyContent="flex-start" spacing={1}>
-					{booksJsonData.map((book: booksJsonDataType) => (
-						<Grid
-							item
-							lg={2}
-							md={2}
-							sm={3}
-							xs={4}
-							className={styles.booksGrid}
-							key={book.id.toString()}
-						>
-							<Box sx={{ padding: "2px", margin: "2px" }}>
-								{/* カードの画像は500px,700pxと決め打ち */}
-								<Link
-									href={book.bookURL}
-									rel="noopener noreferrer"
-									target="_blank"
-								>
-									<Image
-										className={styles.cardImg}
-										src={book.bookImage}
-										alt=""
-										width={500}
-										height={700}
-									/>
-								</Link>
-							</Box>
-							<Box sx={{ padding: "1px", margin: "1px" }}>
-								<Typography align="left" fontSize={14} fontWeight={400}>
-									{book.bookTitle}
-								</Typography>
-								<Typography align="left" fontSize={13} color="#577">
-									{book.bookSubTitle}
-								</Typography>
-							</Box>
-						</Grid>
-					))}
-				</Grid>
-			</section>
 
 			{/* ページタイトル３ */}
 			<h2>
