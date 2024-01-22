@@ -85,7 +85,7 @@ export default function Contact() {
         <Box mb={6} mt={6}>
           <Typography align="center" fontSize={18}>
             <br />
-            お問い合わせページ
+            お問い合わせ
           </Typography>
         </Box>
         <Box>
@@ -124,6 +124,7 @@ export default function Contact() {
             </Stack>
             <Stack alignItems="center" mt={3}>
               <Button
+                disabled
                 color="primary"
                 variant="contained"
                 size="large"
@@ -132,6 +133,7 @@ export default function Contact() {
               >
                 送信する
               </Button>
+              送信機能は現在無効にしております
             </Stack>
 
             <Box height="10vh"></Box>
