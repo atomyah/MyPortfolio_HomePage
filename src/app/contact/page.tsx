@@ -85,7 +85,7 @@ export default function Contact() {
         <Box mb={6} mt={6}>
           <Typography align="center" fontSize={18}>
             <br />
-            お問い合わせ
+            お問い合わせページ
           </Typography>
         </Box>
         <Box>

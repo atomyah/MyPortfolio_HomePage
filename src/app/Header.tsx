@@ -15,15 +15,11 @@ const Header = () => {
 					</Link>
 				</li>
 				<li>
-					{/* <Link href="/contact" className={styles.links}> 
-          シューマツワーカーの依頼でリンク切った. */}
 					<Link href="/contact" className={styles.links}>
 						お問い合わせ
 					</Link>
 				</li>
 				<li>
-					{/* <Link href="/hobby" className={styles.links}> 
-          シューマツワーカーの依頼でリンク切った. */}
 					<Link href="/hobby" className={styles.links}>
 						趣味
 					</Link>

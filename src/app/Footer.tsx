@@ -15,13 +15,11 @@ const Footer = () => {
 					</Link>
 				</li>
 				<li>
-					{/* <Link href="/contact" className={styles.links}> */}
 					<Link href="/contact" className={styles.links}>
 						お問い合わせ
 					</Link>
 				</li>
 				<li>
-					{/* <Link href="/hobby" className={styles.links}> */}
 					<Link href="hobby" className={styles.links}>
 						趣味
 					</Link>
