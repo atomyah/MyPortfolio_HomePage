@@ -23,7 +23,7 @@ const HobbyPage = () => {
     <Container maxWidth="sm">
         <Box mb={6} mt={8}>
             <Typography align="center" fontSize={18}>
-            趣味
+            趣味のページ
             </Typography>
         </Box>
         <Box mb={3} mt={1}>
