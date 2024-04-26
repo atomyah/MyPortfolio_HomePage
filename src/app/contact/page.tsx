@@ -133,7 +133,11 @@ export default function Contact() {
               >
                 送信する
               </Button>
-              送信機能は現在無効にしております
+              （送信機能は現在無効にしております）
+              <br />
+              <p>
+                お仕事のご依頼は<a href="https://shuuumatu-worker.jp/innovation_lp4cde_business?utm_campaign=organic&utm_source=worker" target="_blank" rel="noreferrer">シューマツワーカー</a>へご連絡ください。
+              </p>
             </Stack>
 
             <Box height="10vh"></Box>

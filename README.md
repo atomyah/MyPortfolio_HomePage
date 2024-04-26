@@ -242,7 +242,7 @@ await fetch(`https://my-portfolio-atomyah.vercel.app/api/item/readall`, { cache:
 
 https://my-portfolio-atomyah.vercel.app/
 を、
-https://my-portfolio-atomyah.vercel.app
+http://localhost:3000/
 に全置換.
 
 <br />

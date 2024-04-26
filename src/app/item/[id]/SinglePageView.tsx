@@ -97,6 +97,7 @@ const SinglePageView = ({ singleItem }:SinglePageViewProps) => {
         <Box mb={6} mt={6}>
         <Typography align="center" fontSize={18}>
             <br />
+            <br />
             {singleItem.singleItem.title}
         </Typography>
         </Box>
