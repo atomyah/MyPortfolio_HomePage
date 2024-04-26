@@ -89,6 +89,13 @@ export default function Contact() {
           </Typography>
         </Box>
         <Box>
+          <p>
+               ※ お仕事のご依頼は<a href="https://shuuumatu-worker.jp/innovation_lp4cde_business?utm_campaign=organic&utm_source=worker" target="_blank" rel="noreferrer">シューマツワーカー</a>へご連絡ください（ヤハラ）。
+          </p>
+        </Box>
+        <br />
+        <br />
+        <Box>
           <FormControl fullWidth>
             <Stack spacing={2} direction="column">
               <TextField
@@ -135,9 +142,6 @@ export default function Contact() {
               </Button>
               （送信機能は現在無効にしております）
               <br />
-              <p>
-                お仕事のご依頼は<a href="https://shuuumatu-worker.jp/innovation_lp4cde_business?utm_campaign=organic&utm_source=worker" target="_blank" rel="noreferrer">シューマツワーカー</a>へご連絡ください。
-              </p>
             </Stack>
 
             <Box height="10vh"></Box>
