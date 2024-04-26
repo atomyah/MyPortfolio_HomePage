@@ -53,7 +53,7 @@ const DeleteForm = ({ singleItem }: DeleteFormProps) => {
 	// フォーム送信時の処理（バリデーションOKな時に実行される）
 	const onSubmit: SubmitHandler<DeleteForm> = async (data) => {
 		const response = await fetch(
-			`https://my-portfolio-atomyah.vercel.app/api/item/delete/${singleItem.singleItem._id}`,
+			`https://my-portfolio-henna-sigma-88.vercel.app/api/item/delete/${singleItem.singleItem._id}`,
 			{
 				method: "POST",
 				headers: {
@@ -73,7 +73,7 @@ const DeleteForm = ({ singleItem }: DeleteFormProps) => {
 		if (response.status === 200) {
 			setDeleteSuccess(true);
 			reset(); // フォームのリセット
-			//router.push("https://my-portfolio-atomyah.vercel.app/item/update/updated")
+			//router.push("https://my-portfolio-henna-sigma-88.vercel.app/item/update/updated")
 		} else {
 			alert("正常に削除できませんでした");
 			reset(); // フォームのリセット

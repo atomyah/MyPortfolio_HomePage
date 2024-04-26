@@ -72,7 +72,7 @@ const Register = () => {
 	// フォーム送信時の処理（バリデーションOKなら実行される）
 	const onSubmit: SubmitHandler<RegisterForm> = async (data) => {
 		const response = await fetch(
-			"https://my-portfolio-atomyah.vercel.app/api/user/register",
+			"https://my-portfolio-henna-sigma-88.vercel.app/api/user/register",
 			{
 				// /api/user/registerでは動作せず…
 				method: "POST",

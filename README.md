@@ -41,7 +41,7 @@
 
 ## ポートフォリオサイト URL
 
-https://my-portfolio-atomyah.vercel.app/
+https://my-portfolio-henna-sigma-88.vercel.app/
 
 ## 主な画面レイアウト
 
@@ -235,12 +235,12 @@ git clone https://github.com/atomyah/MyPortfolio_HomePage
 例：
 
 <pre>
-await fetch(`https://my-portfolio-atomyah.vercel.app/api/item/readall`, { cache: "no-store" });
+await fetch(`https://my-portfolio-henna-sigma-88.vercel.app/api/item/readall`, { cache: "no-store" });
 </pre>
 
 <font color="red">エディタを使いそのパスの URL 箇所を次のようにローカルサーバーの URL に全置換する.</font>
 
-https://my-portfolio-atomyah.vercel.app/
+https://my-portfolio-henna-sigma-88.vercel.app/
 を、
 http://localhost:3000/
 に全置換.
@@ -263,7 +263,7 @@ SendGrid、MongoDB、Cloudinary のダッシュボード より各 API キーお
 ### 動作確認
 
 `npm run dev`コマンドで開発サーバーを立ち上げ、
-https://my-portfolio-atomyah.vercel.app にアクセスできるか確認.
+https://my-portfolio-henna-sigma-88.vercel.app にアクセスできるか確認.
 
 ### 停止
 

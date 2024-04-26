@@ -92,7 +92,7 @@ const UpdateForm = ({ singleItem }: UpdateFormProps) => {
 	// フォーム送信時の処理（バリデーションOKな時に実行される）
 	const onSubmit: SubmitHandler<UpdateForm> = async (data) => {
 		const response = await fetch(
-			`https://my-portfolio-atomyah.vercel.app/api/item/update/${singleItem.singleItem._id}`,
+			`https://my-portfolio-henna-sigma-88.vercel.app/api/item/update/${singleItem.singleItem._id}`,
 			{
 				method: "POST",
 				headers: {
@@ -111,7 +111,7 @@ const UpdateForm = ({ singleItem }: UpdateFormProps) => {
 		if (response.status === 200) {
 			// setUpdateSuccess(true);
 			router.push(
-				"https://my-portfolio-atomyah.vercel.app/item/update/updated"
+				"https://my-portfolio-henna-sigma-88.vercel.app/item/update/updated"
 			); // 「編集完了！」メッセージページへリダイレクト.
 		} else {
 			alert("正常に編集できませんでした");

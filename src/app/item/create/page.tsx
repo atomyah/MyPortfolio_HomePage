@@ -78,7 +78,7 @@ const CreatePage = () => {
 	// フォーム送信時の処理（バリデーションOKな時に実行される）
 	const onSubmit: SubmitHandler<CreateForm> = async (data) => {
 		const response = await fetch(
-			"https://my-portfolio-atomyah.vercel.app/api/item/create",
+			"https://my-portfolio-henna-sigma-88.vercel.app/api/item/create",
 			{
 				method: "POST",
 				headers: {
@@ -98,7 +98,7 @@ const CreatePage = () => {
 			//setCreateSuccess(true);
 			//reset() // フォームのリセット
 			router.push(
-				"https://my-portfolio-atomyah.vercel.app/item/create/created"
+				"https://my-portfolio-henna-sigma-88.vercel.app/item/create/created"
 			); // 「追加完了！」メッセージページへリダイレクト.
 		} else {
 			alert("正常に追加できませんでした");

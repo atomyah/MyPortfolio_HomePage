@@ -41,7 +41,7 @@ const Home = () => {
 			setLoading(true); // データ取得開始時にローディング状態をtrueに設定
 			try {
 				const res = await fetch(
-					`https://my-portfolio-atomyah.vercel.app/api/item/readall`,
+					`https://my-portfolio-henna-sigma-88.vercel.app/api/item/readall`,
 					{
 						next: { revalidate: 60 },
 					}

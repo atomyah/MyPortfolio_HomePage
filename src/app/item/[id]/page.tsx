@@ -15,7 +15,7 @@ const ReadSingleItem = async ({ params }: { params: { id: string } }) => {
 	// console.log('paramsは、', params); 表示結果→ "paramsは、 { id: '656809a035cb1609ceb947e1' }"
 
 	const res = await fetch(
-		`https://my-portfolio-atomyah.vercel.app/api/item/${params.id}`,
+		`https://my-portfolio-henna-sigma-88.vercel.app/api/item/${params.id}`,
 		{
 			cache: "no-store",
 		}
